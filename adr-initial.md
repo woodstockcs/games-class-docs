@@ -9,7 +9,9 @@ layout: default
 
 ## Initial Gameplay
 
-Go to [A Dark Room](https://adarkroom.doublespeakgames.com/) and play the game for 10-20 minutes, then answer as many Notice & Wonder questions below as you can.
+Go to [https://adarkroom.doublespeakgames.com/](https://adarkroom.doublespeakgames.com/) and play A Dark Room for 10-20 minutes.
+
+Then answer as many Notice & Wonder questions below as you can.
 
 If you already have a game in progress, consider saving it (so you can get it back later) and starting a new game to think about while you answer these questions.
 
