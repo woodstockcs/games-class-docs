@@ -143,17 +143,3 @@ if (fireIntensity === "dark") {
     roomStatus = "the room is hot";
 }
 ```
-
-These snippets demonstrate several key programming concepts:
-1. Boolean conditions (true/false checks)
-2. Comparison operators (===, >=, >)
-3. Multiple conditions using && (and)
-4. if/else if/else statements
-5. Variable modification based on conditions
-6. State tracking through variables
-
-Would you like me to create some student exercises that use these snippets? For example, students could:
-- Predict what happens when variables change
-- Debug slightly broken versions
-- Extend the code with new features
-- Combine snippets to create more complex behaviors
