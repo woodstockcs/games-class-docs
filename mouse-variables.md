@@ -23,7 +23,7 @@ Watch [this video](https://www.youtube.com/watch?v=7A5tKW9HGoM).
 
 And annotate [these images](https://docs.google.com/document/d/1cSMQSWUJLECcQgc9xebWgl_oi982MgJ8RRtBLH9hloM/edit?tab=t.0).
 
-## Check Your Understanding
+## Exercises
 
 #### 1. Mouse Following
 ```javascript
@@ -37,7 +37,7 @@ function draw() {
   circle(???, ???, 30);
 }
 ```
-Hoqw 
+
 #### 2. State Change
 ```javascript
 function setup() {
@@ -74,29 +74,8 @@ function draw() {
 }
 ```
 
-## Exercises
 
-
-## Optional Extras
-
-#### 1. Ghost Trail
-```javascript
-function setup() {
-  createCanvas(400, 400);
-}
-
-function draw() {
-  background(220);
-  // Make circle bigger when on right side of canvas
-  if (??? > ???) {
-    circle(mouseX, mouseY, 50);
-  } else {
-    circle(mouseX, mouseY, 20);
-  }
-}
-```
-
-#### 2. Opposite Circle
+#### 4. Opposite Circle
 ```javascript
 function setup() {
   createCanvas(400, 400);
@@ -112,7 +91,7 @@ function draw() {
 }
 ```
 
-#### 3. Magic Marker
+#### 5. Magic Marker
 ```javascript
 function setup() {
   createCanvas(400, 400);
