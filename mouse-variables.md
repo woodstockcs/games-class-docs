@@ -122,9 +122,5 @@ function draw() {
   
   circle(???, ???, ???);
 }
-
-function mousePressed() {
-  background(220);
-}
 ```
 
