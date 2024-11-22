@@ -37,7 +37,7 @@ function draw() {
   circle(???, ???, 30);
 }
 ```
-
+Hoqw 
 #### 2. State Change
 ```javascript
 function setup() {
@@ -75,6 +75,9 @@ function draw() {
 ```
 
 ## Exercises
+
+
+## Optional Extras
 
 #### 1. Ghost Trail
 ```javascript
