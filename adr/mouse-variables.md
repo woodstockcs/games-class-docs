@@ -11,8 +11,8 @@ layout: default
 
 <table>
   <tr>
-    <td>use `mouseX` and `mouseY` variables</td>
-    <!-- <td style="width:100%">to use `mouseX` and `mouseY` variables</td> -->
+    <th>Learning:</th>
+    <td style="width:100%">use `mouseX` and `mouseY` variables</td>
   </tr>
 </table>
 
@@ -54,8 +54,8 @@ function draw() {
 
 ### 2. Color Change
 {: .d-inline-block}
-Proficient
-{: .label .label-yellow }
+Approaching
+{: .label .label-green }
 
 ```javascript
 function setup() {
@@ -80,7 +80,7 @@ function draw() {
 ### 3. Location Check
 {: .d-inline-block}
 Proficient
-{: .label .label-yellow }
+{: .label .label-blue }
 
 ```javascript
 function setup() {
