@@ -1,8 +1,9 @@
-title: WCS Games
+title: Woodstock Games
 description: Course materials for 1-semester intro coding course focused on game design.
 theme: just-the-docs
-
-url: https://woodstockcs.github.io/games-course
+baseurl: ''
+url: 'https://woodstockcs.github.io/games-class-docs'
+repository: woodstockcs/games-class-docs
 
 nav_enabled: true
 heading_anchors: true
