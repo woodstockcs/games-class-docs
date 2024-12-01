@@ -7,18 +7,24 @@ layout: default
 
 # Mouse Variables
 
+## Purpose
+
+<table>
+  <tr>
+    <td>use `mouseX` and `mouseY` variables</td>
+    <!-- <td style="width:100%">to use `mouseX` and `mouseY` variables</td> -->
+  </tr>
+</table>
+
 ## Sandbox
 
 1. Open and duplicate [this sandbox sketch](https://editor.p5js.org/woodstock-cs/sketches/0B_2WK4j8/).
 2. Try the updates suggested at in the comments at the top.
+3. Why do we need both setup() and draw()?
+4. What might happen if we remove background() entirely?
+5. How does the computer know where the mouse is?
 
-## Think about
-
-1. Why do we need both setup() and draw()?
-2. What might happen if we remove background() entirely?
-3. How does the computer know where the mouse is?
-
-## Notes
+## Walkthrough
 
 Watch [this video](https://www.youtube.com/watch?v=7A5tKW9HGoM).
 
@@ -26,7 +32,11 @@ And annotate [these images](https://docs.google.com/document/d/1cSMQSWUJLECcQgc9
 
 ## Exercises
 
-#### 1. Mouse Following
+<!-- prettier-ignore-start -->
+### 1. Mouse Following
+{: .d-inline-block}
+Approaching
+{: .label .label-green }
 
 ```javascript
 function setup() {
@@ -40,7 +50,12 @@ function draw() {
 }
 ```
 
-#### 2. State Change
+
+
+### 2. Color Change
+{: .d-inline-block}
+Proficient
+{: .label .label-yellow }
 
 ```javascript
 function setup() {
@@ -60,7 +75,12 @@ function draw() {
 }
 ```
 
-#### 3. Location Check
+
+
+### 3. Location Check
+{: .d-inline-block}
+Proficient
+{: .label .label-yellow }
 
 ```javascript
 function setup() {
@@ -78,7 +98,12 @@ function draw() {
 }
 ```
 
-#### 4. Opposite Circle
+
+
+### 4. Opposite Circle
+{: .d-inline-block}
+Distinguished
+{: .label .label-red }
 
 ```javascript
 function setup() {
@@ -95,7 +120,10 @@ function draw() {
 }
 ```
 
-#### 5. Magic Marker
+### 5. Magic Marker
+{: .d-inline-block}
+Distinguished
+{: .label .label-red }
 
 ```javascript
 function setup() {
@@ -110,3 +138,4 @@ function draw() {
   circle(???, ???, ???);
 }
 ```
+<!-- prettier-ignore-end -->
