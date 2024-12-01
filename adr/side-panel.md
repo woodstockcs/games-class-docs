@@ -5,7 +5,9 @@ parent: A Dark Room
 layout: default
 ---
 
-# ADR Side Panel
+# Side Panel
+
+<br><br>
 
 ## Purpose
 
@@ -19,6 +21,7 @@ layout: default
     <td style="width:100%">display text on the ADR Side Panel</td>
   </tr>
 </table>
+<br><br>
 
 ## Sandbox
 
@@ -31,14 +34,17 @@ layout: default
 | `addToPanel("10 > 50")`         |                               |
 | `addToPanelAfter(5, "burning")` |                               |
 
+<br><br>
+
 ## Walkthrough
 
 <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSHhbi4COq4KbhGGg6uNqkj2_QMZ3YKg2Z9dAprlKm3h_INEZMGUCTNFH2qFBPe8jFWK7X-hkfptIM-/embed" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
+<br><br>
+
 ## Exercises
 
 <!-- prettier-ignore-start -->
-
 ### 1. Changing Messages 
 {: .d-inline-block}
 Approaching
@@ -49,7 +55,6 @@ Approaching
 addToPanel("cold");
 
 // Change the argument to show "freezing" instead
-
 ```
 
 
@@ -64,7 +69,6 @@ Approaching
 // 1. "the fire is dying"
 // 2. "you gather wood"
 // 3. "the room is warm"
-
 ```
 
 
