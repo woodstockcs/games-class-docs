@@ -44,13 +44,19 @@ layout: default
 
 # Walkthrough
 
+1. Browse these slides. (push the arrows to make sure you don't miss any)
+
 <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSHhbi4COq4KbhGGg6uNqkj2_QMZ3YKg2Z9dAprlKm3h_INEZMGUCTNFH2qFBPe8jFWK7X-hkfptIM-/embed" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+1. Grab the [walkthrough paper](https://drive.google.com/file/d/1mpaXqkwU3-C0AHbNOb3VR6HaiARYG3Yd/view?usp=sharing) from the classroom.
+1. Copy the slides onto your paper.
+1. Add your own observations in the `Patterns` boxes on your paper.
 
 {: .note-title}
 
-> Complete the paper...
+> Before continuing:
 >
-> Grab the walkthrough paper in the classroom, complete it, submit it, then check the box in your sprint notes.
+> Drop the paper in the INBOX, then check the box in your sprint notes.
 
 <br><br>
 
