@@ -111,7 +111,6 @@ Proficient
 ```javascript
 // Still only working inside the definition of the setup() function.
 //
-// Someone is walking closer...
 // Show these messages 2 seconds apart:
 // "footsteps in the distance"
 // "getting closer"
