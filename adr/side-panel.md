@@ -9,7 +9,7 @@ layout: default
 
 <br><br>
 
-## Purpose
+# Purpose
 
 <table>
   <tr>
@@ -17,13 +17,13 @@ layout: default
     <td style="width:100%">how to talk about functions</td>
   </tr>
   <tr>
-    <th>Creating:</th>
-    <td style="width:100%">display text on the ADR Side Panel</td>
+    <th>Making ADR:</th>
+    <td style="width:100%">display text on the Side Panel</td>
   </tr>
 </table>
 <br><br>
 
-## Sandbox
+# Sandbox
 
 | Code                            | Output                        |
 | :------------------------------ | :---------------------------- |
@@ -34,18 +34,30 @@ layout: default
 | `addToPanel("10 > 50")`         |                               |
 | `addToPanelAfter(5, "burning")` |                               |
 
+{: .note-title}
+
+> Write in your sprint notes...
+>
+> what goes in the blanks from the table above.
+
 <br><br>
 
-## Walkthrough
+# Walkthrough
 
 <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSHhbi4COq4KbhGGg6uNqkj2_QMZ3YKg2Z9dAprlKm3h_INEZMGUCTNFH2qFBPe8jFWK7X-hkfptIM-/embed" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
+{: .note-title}
+
+> Complete the paper...
+>
+> Grab the walkthrough paper in the classroom, complete it, submit it, then check the box in your sprint notes.
+
 <br><br>
 
-## Exercises
+# Exercises
 
 <!-- prettier-ignore-start -->
-### 1. Changing Messages 
+### Freezing
 {: .d-inline-block}
 Approaching
 {: .label .label-green }
@@ -53,57 +65,32 @@ Approaching
 ```javascript
 // This code shows "cold":
 addToPanel("cold");
-
-// Change the argument to show "freezing" instead
+//
+// Change the argument to "freezing"
+//
+// Then call addToPanel three more times with these arguments:
+// "the fire is dying"
+// "you gather wood"
+// "the room is warm"
 ```
 
+{: .note-title}
+
+> Do this:
+>
+> Do what the comments ask for.
+>
+> Rename the sketch `Freezing` and save it.
+>
+> Then write that name in your sprint notes.
+
+<br><br>
 
 
-### 2. More Messages 
-{: .d-inline-block}
-Approaching
-{: .label .label-green }
-
-```javascript
-// Call addToPanel three times to show:
-// 1. "the fire is dying"
-// 2. "you gather wood"
-// 3. "the room is warm"
-```
-
-
-
-### 3. Stranger Sequence
-{: .d-inline-block}
-Proficient
-{: .label .label-blue }
-
-```javascript
-// Create this sequence:
-// 1. call the addToPanel function with this argument: "a stranger arrives" 
-// 2. call the addToPanelAfter function with 2 arguments: 3 and "they carry wood"
-```
-
-
-
-### 4. Day and Night
+### Footsteps 
 {: .d-inline-block}
 Proficient
 {: .label .label-blue }
-
-```javascript
-// The sun rises, then sets after 5 seconds
-// Show these messages:
-// 1. "light filters in" immediately
-// 2. "darkness falls" after 5 seconds
-```
-
-
-
-### 5. Footsteps 
-{: .d-inline-block}
-Distinguished
-{: .label .label-red }
 
 ```javascript
 // Someone is walking closer...
@@ -120,23 +107,42 @@ Distinguished
 // "a stranger enters"
 ```
 
+{: .note-title}
+
+> Do this:
+>
+> Do what the comments ask for.
+>
+> Rename the sketch `Footsteps` and save it.
+>
+> Then write that name in your sprint notes.
+
+<br><br>
 
 
-### 6. Trading Stories
+### Stranger
 {: .d-inline-block}
 Distinguished
 {: .label .label-red }
 
 ```javascript
-// A stranger shares news from their village
-// Show these messages:
-//
-// First immediately:
-// 1. "the stranger clears their throat"
-// 2. "their village needs help"
-//
-// Then after 5 seconds:
-// 3. "they have no wood"
-// 4. "their children are cold"
+// Create this sequence:
+// 1. call the addToPanel function with this argument: "a stranger arrives" 
+// 2. call the addToPanelAfter function with 2 arguments: 3 and "they carry wood"
+// 3. at the same time as the last message, show "light filters in"
+// 4. show "darkness falls" 3 seconds after the light filters in
 ```
+
+{: .note-title}
+
+> Do this:
+>
+> Do what the comments ask for.
+>
+> Rename the sketch `Stranger` and save it.
+>
+> Then write that name in your sprint notes.
+
+<br><br>
+
 <!-- prettier-ignore-end -->
