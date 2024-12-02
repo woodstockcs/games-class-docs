@@ -48,7 +48,7 @@ layout: default
 
 <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSHhbi4COq4KbhGGg6uNqkj2_QMZ3YKg2Z9dAprlKm3h_INEZMGUCTNFH2qFBPe8jFWK7X-hkfptIM-/embed" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
-1. Grab the [walkthrough paper](https://drive.google.com/file/d/1mpaXqkwU3-C0AHbNOb3VR6HaiARYG3Yd/view?usp=sharing) from the classroom.
+1. Grab the [vocab walkthrough paper](https://drive.google.com/file/d/1mpaXqkwU3-C0AHbNOb3VR6HaiARYG3Yd/view?usp=sharing) from the classroom.
 1. Copy the slides onto your paper.
 1. Add your own observations in the `Patterns` boxes on your paper.
 
@@ -56,7 +56,7 @@ layout: default
 
 > Before continuing:
 >
-> Drop the paper in the INBOX, then check the box in your sprint notes.
+> Make sure your name is on the paper, drop it in the INBOX, then check the box in your sprint notes.
 
 <br><br>
 
@@ -128,8 +128,6 @@ Proficient
 
 > Before continuing:
 >
-> Do what the comments ask for.
->
 > Rename the sketch `Footsteps` and save it.
 >
 > Then write that name in your sprint notes.
@@ -157,8 +155,6 @@ Distinguished
 {: .note-title}
 
 > Before continuing:
->
-> Do what the comments ask for.
 >
 > Rename the sketch `Stranger` and save it.
 >
