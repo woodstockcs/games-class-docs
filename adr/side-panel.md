@@ -62,23 +62,29 @@ layout: default
 Approaching
 {: .label .label-green }
 
+1. Duplicate this [Side Panel Distro Code](https://editor.p5js.org/woodstock-cs/sketches/Gy08H5COb).
+1. Run the sketch.
+1. Update the code according to the comments below.
+
 ```javascript
-// This code shows "cold":
+// This code shows "cold"
 addToPanel("cold");
 //
-// Change the argument to "freezing"
+// Change the argument to "freezing".
 //
-// Then call addToPanel three more times with these arguments:
+// And remove the now-incorrect comment above that line of code.
+//
+// For now we're only working inside the definition of the setup() function.
+// 
+// Call addToPanel three more times with these arguments:
 // "the fire is dying"
 // "you gather wood"
-// "the room is warm"
+// "the room will be warm soon"
 ```
 
 {: .note-title}
 
-> Do this:
->
-> Do what the comments ask for.
+> Before continuing:
 >
 > Rename the sketch `Freezing` and save it.
 >
@@ -92,12 +98,17 @@ addToPanel("cold");
 Proficient
 {: .label .label-blue }
 
+1. Duplicate this [Side Panel Distro Code](https://editor.p5js.org/woodstock-cs/sketches/Gy08H5COb).
+1. Run the sketch.
+1. Update the code according to the comments below.
+
 ```javascript
+// Still only working inside the definition of the setup() function.
+//
 // Someone is walking closer...
-// Show these messages 1 second apart:
+// Show these messages 2 seconds apart:
 // "footsteps in the distance"
 // "getting closer"
-// "closer still"
 // "almost here"
 // "at the door"
 // "knock"
@@ -109,7 +120,7 @@ Proficient
 
 {: .note-title}
 
-> Do this:
+> Before continuing:
 >
 > Do what the comments ask for.
 >
@@ -125,6 +136,10 @@ Proficient
 Distinguished
 {: .label .label-red }
 
+1. Duplicate this [Side Panel Distro Code](https://editor.p5js.org/woodstock-cs/sketches/Gy08H5COb).
+1. Run the sketch.
+1. Update the code according to the comments below.
+
 ```javascript
 // Create this sequence:
 // 1. call the addToPanel function with this argument: "a stranger arrives" 
@@ -135,7 +150,7 @@ Distinguished
 
 {: .note-title}
 
-> Do this:
+> Before continuing:
 >
 > Do what the comments ask for.
 >
