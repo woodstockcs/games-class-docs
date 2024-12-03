@@ -5,7 +5,8 @@ parent: A Dark Room
 layout: default
 ---
 
-# Side Panel
+# Topic
+Today's topic is the **Side Panel** in A Dark Room.
 
 <br><br>
 
@@ -17,7 +18,7 @@ layout: default
     <td style="width:100%">how to talk about functions</td>
   </tr>
   <tr>
-    <th>Making ADR:</th>
+    <th>ADR Project:</th>
     <td style="width:100%">display text on the Side Panel</td>
   </tr>
 </table>
@@ -25,20 +26,22 @@ layout: default
 
 # Sandbox
 
+Study the table below, which shows the output created by each line of code. What do you guess belongs in the `?` spots in the table?
+
 | Code                            | Output                        |
 | :------------------------------ | :---------------------------- |
 | `addToPanel("freezing")`        | shows _freezing_ in the panel |
-| `addToPanel(3 < 4)`             |                               |
-| `addToPanel("3 < 4")`           |                               |
-| `addToPanel(10 > 50)`           | shows _false_ in the panel    |
-| `addToPanel("10 > 50")`         |                               |
-| `addToPanelAfter(5, "burning")` |                               |
+| `addToPanel(3 < 4)`             | shows _true_ in the panel    |
+| `addToPanel("3 < 4")`           | ?                              |
+| `addToPanel(10 > 50)`           | ?   |
+| `addToPanel("10 > 50")`         | shows literally _10 > 50_ in the panel                               |
+| `addToPanelAfter(5, "burning")` | ?                              |
 
 {: .note-title}
 
 > Write in your sprint notes...
 >
-> what goes in the blanks from the table above.
+> what you guess belongs in the `?` spots in the table above.
 
 <br><br>
 
