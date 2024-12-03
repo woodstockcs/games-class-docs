@@ -26,7 +26,9 @@ Today's topic is the **Side Panel** in A Dark Room.
 
 # Sandbox
 
-Study the table below, which shows the output created by each line of code. What do you guess belongs in the `?` spots in the table?
+Study the table below, which shows the output created by some lines of code.
+
+What do you guess belongs in the `?` spots in the table?
 
 | Code                            | Output                        |
 | :------------------------------ | :---------------------------- |
