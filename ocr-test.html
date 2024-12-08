@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .video-container {
+        position: relative;
+        margin-bottom: 20px;
+      }
+      #mainVideo {
+        width: 100%;
+      }
+      #captureCanvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+      .ocr-results {
+        margin-top: 10px;
+        padding: 10px;
+        background: #f0f0f0;
+        border-radius: 4px;
+        font-family: monospace;
+      }
+      .debug-info {
+        margin-top: 10px;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 4px;
+      }
+      #processingIndicator {
+        display: none;
+        color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="video-container">
+        <video id="mainVideo" controls>
+          <source src="ocr-test.webm" type="video/webm" />
+        </video>
+        <canvas id="captureCanvas"></canvas>
+      </div>
+      <div class="ocr-results">
+        <p>Detected Text: <span id="detectedText">None</span></p>
+        <p id="processingIndicator">Processing frame...</p>
+      </div>
+      <div class="debug-info">
+        <p>OCR Status: <span id="ocrStatus">Initializing...</span></p>
+        <p>
+          Last processed at: <span id="lastProcessed">Never</span>
+        </p>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js"></script>
+    <script>
+      const video = document.getElementById('mainVideo');
+      const canvas = document.getElementById('captureCanvas');
+      const ctx = canvas.getContext('2d');
+      const detectedTextElement =
+        document.getElementById('detectedText');
+      const statusElement = document.getElementById('ocrStatus');
+      const lastProcessedElement =
+        document.getElementById('lastProcessed');
+      const processingIndicator = document.getElementById(
+        'processingIndicator'
+      );
+
+      let worker = null;
+      let processingInterval = null;
+
+      // Initialize Tesseract worker
+      function initializeWorker() {
+        return Tesseract.createWorker({
+          logger: (message) => {
+            if (message.status === 'recognizing text') {
+              processingIndicator.style.display = 'block';
+            }
+          },
+        }).then(async (w) => {
+          await w.loadLanguage('eng');
+          await w.initialize('eng');
+          await w.setParameters({
+            tessedit_char_whitelist:
+              'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789(){}[]<>=+-*/%,;:. ',
+          });
+          return w;
+        });
+      }
+
+      // Set canvas size to match video
+      function updateCanvasSize() {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+      }
+
+      // Process frame for OCR
+      async function processVideoFrame() {
+        if (!worker) return;
+
+        // Draw current video frame to canvas
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        try {
+          statusElement.textContent = 'Processing...';
+          processingIndicator.style.display = 'block';
+
+          // Perform OCR on the frame
+          const result = await worker.recognize(canvas);
+
+          // Update display
+          detectedTextElement.textContent =
+            result.data.text.trim() || 'No text detected';
+          lastProcessedElement.textContent =
+            new Date().toLocaleTimeString();
+          statusElement.textContent = 'Ready';
+
+          // Check for specific text triggers
+          const lowerText = result.data.text.toLowerCase();
+          if (
+            lowerText.includes('pause') ||
+            lowerText.includes('stop')
+          ) {
+            video.pause();
+            console.log('Video paused due to text trigger');
+          }
+        } catch (error) {
+          console.error('OCR Error:', error);
+          statusElement.textContent = 'Error';
+        } finally {
+          processingIndicator.style.display = 'none';
+        }
+      }
+
+      // Initialize everything when the page loads
+      (async function initialize() {
+        try {
+          worker = await initializeWorker();
+          statusElement.textContent = 'Ready';
+
+          video.addEventListener('loadedmetadata', updateCanvasSize);
+
+          video.addEventListener('play', function () {
+            statusElement.textContent = 'Active';
+            processingInterval = setInterval(() => {
+              if (video.paused || video.ended) {
+                clearInterval(processingInterval);
+                statusElement.textContent = 'Inactive';
+                return;
+              }
+              processVideoFrame();
+            }, 1000); // Process every second - adjust as needed
+          });
+
+          video.addEventListener('ended', async () => {
+            clearInterval(processingInterval);
+            statusElement.textContent = 'Finished';
+            if (worker) {
+              await worker.terminate();
+              worker = null;
+            }
+          });
+        } catch (error) {
+          console.error('Initialization error:', error);
+          statusElement.textContent = 'Failed to initialize';
+        }
+      })();
+
+      // Cleanup when page unloads
+      window.addEventListener('unload', async () => {
+        if (processingInterval) {
+          clearInterval(processingInterval);
+        }
+        if (worker) {
+          await worker.terminate();
+        }
+      });
+    </script>
+  </body>
+</html>
