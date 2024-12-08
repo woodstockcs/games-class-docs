@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .video-container {
+        margin-bottom: 20px;
+      }
+      .input-container {
+        margin: 20px 0;
+        position: relative;
+      }
+      .code-wrapper {
+        position: relative;
+        margin-bottom: 10px;
+      }
+      #codeInput,
+      #templateText {
+        width: 100%;
+        height: 100px;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        letter-spacing: 0;
+      }
+      #codeInput {
+        background: transparent;
+        position: relative;
+        z-index: 2;
+        resize: none;
+      }
+      #templateText {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #999;
+        background: transparent;
+        pointer-events: none;
+        z-index: 1;
+        white-space: pre-wrap;
+        border: none;
+      }
+      .feedback {
+        padding: 10px;
+        margin: 10px 0;
+        display: none;
+        border-radius: 4px;
+      }
+      .feedback.success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+      .feedback.error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+      .feedback.hint {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeeba;
+      }
+      .hint-button {
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+      .hint-button:hover {
+        background-color: #5a6268;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="video-container">
+        <video id="lessonVideo" width="100%" controls>
+          <source src="xyz.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <div class="input-container">
+        <button id="hintButton" class="hint-button">Show Hint</button>
+        <div class="code-wrapper">
+          <div id="templateText"></div>
+          <textarea
+            id="codeInput"
+            placeholder="Type your code here..."
+          ></textarea>
+        </div>
+        <div id="feedback" class="feedback"></div>
+      </div>
+    </div>
+
+    <script>
+      const videoCheckpoints = [
+        {
+          time: 2,
+          pattern: /console\.log\("Hello, World!"\);?/,
+          instruction:
+            'Type the console.log statement shown in the video',
+          feedback: 'Great job! The video will continue.',
+          hintSteps: [
+            {
+              match: /^c/i,
+              template: 'onsole.log("Hello, World!");',
+            },
+            {
+              match: /^console\./i,
+              template: 'log("Hello, World!");',
+            },
+            {
+              match: /^console\.log\(/i,
+              template: '"Hello, World!");',
+            },
+          ],
+          mistakes: [
+            {
+              pattern: /console\.log\('Hello, World!'\);?/,
+              hint: 'Almost! Make sure to use double quotes (") instead of single quotes (\')',
+            },
+            {
+              pattern: /console\.log\("hello, world!"\);?/i,
+              hint: "Check the capitalization - it should be 'Hello, World!'",
+            },
+          ],
+        },
+        {
+          time: 4,
+          pattern: /const\s+x\s*=\s*42;?/,
+          instruction:
+            "Create a constant variable 'x' and set it to 42",
+          feedback: "Perfect! Let's continue with the lesson.",
+          hintSteps: [
+            {
+              match: /^c/i,
+              template: 'onst x = 42;',
+            },
+            {
+              match: /^const\s+x/i,
+              template: ' = 42;',
+            },
+            {
+              match: /^const\s+x\s*=/i,
+              template: ' 42;',
+            },
+          ],
+          mistakes: [
+            {
+              pattern: /let\s+x\s*=\s*42;?/,
+              hint: "Use 'const' instead of 'let' since this value won't be reassigned",
+            },
+            {
+              pattern: /var\s+x\s*=\s*42;?/,
+              hint: "Use 'const' instead of 'var' for better scoping and to prevent reassignment",
+            },
+          ],
+        },
+      ];
+
+      const video = document.getElementById('lessonVideo');
+      const codeInput = document.getElementById('codeInput');
+      const templateText = document.getElementById('templateText');
+      const feedbackElement = document.getElementById('feedback');
+      const hintButton = document.getElementById('hintButton');
+
+      let currentCheckpoint = 0;
+
+      video.addEventListener('timeupdate', function () {
+        if (currentCheckpoint >= videoCheckpoints.length) return;
+
+        const checkpoint = videoCheckpoints[currentCheckpoint];
+        if (video.currentTime >= checkpoint.time && !video.paused) {
+          video.pause();
+          codeInput.placeholder = checkpoint.instruction;
+          feedbackElement.textContent = checkpoint.instruction;
+          feedbackElement.className = 'feedback';
+          feedbackElement.style.display = 'block';
+        }
+      });
+
+      function checkForMistakes(input, checkpoint) {
+        for (const mistake of checkpoint.mistakes) {
+          if (mistake.pattern.test(input)) {
+            return mistake.hint;
+          }
+        }
+        return null;
+      }
+
+      function showTemplateHint() {
+        const checkpoint = videoCheckpoints[currentCheckpoint];
+        const currentInput = codeInput.value;
+
+        // Find the most appropriate hint step based on current input
+        const appropriateHint = checkpoint.hintSteps.find((step) =>
+          step.match.test(currentInput)
+        );
+
+        if (appropriateHint) {
+          // Calculate the prefix length (what the user has already typed)
+          const prefixMatch = currentInput.match(
+            appropriateHint.match
+          )[0];
+
+          // Create full template text with user's input preserved
+          templateText.textContent =
+            currentInput + appropriateHint.template;
+        } else if (currentInput === '') {
+          // If nothing has been typed, show the complete first step
+          const firstStep = checkpoint.hintSteps[0];
+          templateText.textContent =
+            firstStep.match.source.slice(1) + firstStep.template;
+        }
+      }
+
+      hintButton.addEventListener('click', showTemplateHint);
+
+      codeInput.addEventListener('input', function () {
+        if (currentCheckpoint >= videoCheckpoints.length) return;
+
+        const checkpoint = videoCheckpoints[currentCheckpoint];
+        const input = codeInput.value;
+
+        // Clear template text when user is typing
+        templateText.textContent = '';
+
+        if (checkpoint.pattern.test(input)) {
+          feedbackElement.textContent = checkpoint.feedback;
+          feedbackElement.className = 'feedback success';
+          feedbackElement.style.display = 'block';
+
+          setTimeout(() => {
+            video.play();
+            currentCheckpoint++;
+            codeInput.value = '';
+            templateText.textContent = '';
+            feedbackElement.style.display = 'none';
+          }, 1500);
+        } else {
+          const hint = checkForMistakes(input, checkpoint);
+          if (hint) {
+            feedbackElement.textContent = hint;
+            feedbackElement.className = 'feedback hint';
+            feedbackElement.style.display = 'block';
+          } else {
+            feedbackElement.style.display = 'none';
+          }
+        }
+      });
+
+      // Clear template text when input is focused
+      codeInput.addEventListener('focus', function () {
+        templateText.textContent = '';
+      });
+    </script>
+  </body>
+</html>
