@@ -72,60 +72,67 @@ Try these experiments:
 
 ## Exercises
 
-### <u>Fading Square</u>
+### <u>Mission Timer 🚀</u>
 {: .d-inline-block}
 Practice
 {: .label .label-green }
 
-Create a square that changes color every 2 seconds and shows how many changes have happened.
+You're building the display screens for Mission Control. Create a program that tracks multiple mission timelines and alerts.
 
 ```javascript
-// Keep track of important numbers
-let colorChanges = 0;        // How many times color has changed
-let lastChangeTime = 0;      // When did we last change color
-let squareColor = 0;         // Current color (0-255)
+// Mission timers
+let missionTime = 0;      // Main mission clock
+let fuelCheck = 0;        // Fuel system checks
+let lifeSupport = 0;      // Life support pings
+let alertBlink = true;    // For blinking effect
 
 function setup() {
   createCanvas(400, 400);
-  // Start tracking time
-  lastChangeTime = round(millis()/1000);
 }
 
 function draw() {
-  background(220);
-
-  // Get current time in seconds
-  let currentTime = round(millis()/1000);
-
-  // Check if 2 seconds have passed
-  // HINT: currentTime - lastChangeTime tells us how long since last change
-  if (???) {
-    // Pick new random color (0-255)
-    squareColor = random(255);
-
-    // Count this color change
-    colorChanges = colorChanges + 1;
-
-    // Reset the timer
-    lastChangeTime = currentTime;
+  background(0);  // Space black
+  
+  // Update all our timers
+  missionTime = round(millis() / 1000);         // Main clock - seconds
+  fuelCheck = round(millis() / 2000);           // Fuel - every 2 seconds
+  lifeSupport = round(millis() / 500);          // Life support - twice per second
+  
+  // Blink effect - switch every second
+  if (missionTime % 2 === 0) {
+    alertBlink = !alertBlink;
   }
 
-  // Draw square with current color
-  fill(squareColor);
-  rect(150, 150, 100, 100);
-
-  // Show how many changes on screen
-  fill(0);           // Black text
-  textSize(16);      // Medium size
-  text("Color changes: " + colorChanges, 20, 30);
-  text("Seconds since last change: " + (currentTime - lastChangeTime), 20, 60);
-}
-
-function mousePressed() {
-  // Reset all variables to starting values
-  colorChanges = 0;
-  lastChangeTime = round(millis()/1000);
-  squareColor = 0;
+  // See the blink value change
+  textSize(10);
+  text("blink is: " + alertBlink, 250, 50);
+  
+  // Style for displays
+  textSize(20);
+  
+  // Main mission clock - white
+  fill(255);
+  text("MISSION TIME: " + missionTime, 50, 100);
+  
+  // Fuel check timer - green
+  fill(0, 255, 0);
+  text("FUEL CHECK: " + "REPLACEME", 50, 200);
+  
+  // Life support pings - blue
+  fill(0, 150, 255);
+  text("LIFE SUPPORT: " + "REPLACEME", 50, 300);
+  
+  // TASKS for you:
+  //
+  // 1. Fill in the "REPLACEME" spots above
+  //    to show the fuelCheck and lifeSupport variables
+  //
+  // 2. Add "ALERT!" in red (255,0,0) at x:50 y:150 
+  //    HINT:
+  //    if (alertBlink == true) {
+  //      fill(...)
+  //      text(...)
+  //    }
 }
 ```
 
@@ -133,7 +140,7 @@ function mousePressed() {
 
 > Before continuing:
 >
-> Rename the sketch `Fading Square` and save it.
+> Rename the sketch `Mission Timer` and save it.
 >
 > Then write that name in your sprint notes.
 
