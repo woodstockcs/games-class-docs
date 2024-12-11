@@ -24,9 +24,9 @@ function setup() {
 
 function draw() {
   background(220);
-  let currentTime = round(millis() / 1000);
-  circle(200, 200, currentTime * 10);
-  text(currentTime + ' seconds', 10, 20);
+  let elapsedTime = round(millis() / 1000);
+  circle(200, 200, elapsedTime * 10);
+  text(elapsedTime + ' seconds', 10, 20);
 }
 ```
 
@@ -34,8 +34,8 @@ Try these experiments:
 
 - Change the multiplication factor (10) to make the circle grow faster/slower
 - Add a second circle that grows at a different rate
-- Try using currentTime to change the circle's color
-- What happens if you remove round() from millis()/1000?
+- Try using `elapsedTime` to change the circle's color
+- What happens if you remove `round(...)` from `millis()/1000`?
 
 {: .note-title}
 
