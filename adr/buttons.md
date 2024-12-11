@@ -25,7 +25,7 @@ layout: default
 
 # Sandbox
 
-1. Open the [Buttons Distro Code](https://editor.p5js.org/woodstock-cs/sketches/TEzeoGPC7).
+1. Open the [Buttons Distro Code](https://editor.p5js.org/woodstock-cs/sketches/TEzeoGPC7){:target="\_blank"}.
 2. Run it and try these experiments.
    - Click each button several times
    - Wait for buttons to re-enable (watch the sweep animation)
@@ -70,7 +70,7 @@ layout: default
 Approaching
 {: .label .label-green }
 
-1. Duplicate this [Buttons Distro Code](https://editor.p5js.org/woodstock-cs/sketches/TEzeoGPC7).
+1. Duplicate this [Buttons Distro Code](https://editor.p5js.org/woodstock-cs/sketches/TEzeoGPC7){:target="\_blank"}.
 2. Make these small changes to test your understanding:
    - Change the initial `wood` value in setup to 100
    - Update the "get wood" button to give 2 wood
