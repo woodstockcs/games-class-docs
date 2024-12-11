@@ -85,6 +85,8 @@ Approaching
 >
 > Then write that name in your sprint notes.
 
+<br><br>
+
 ### New Theme
 {: .d-inline-block}
 Proficient
@@ -111,6 +113,8 @@ Example themes:
 > Rename the sketch `New Theme` and save it.
 >
 > Then write that name in your sprint notes.
+
+<br><br>
 
 ### New Button
 {: .d-inline-block}
@@ -139,6 +143,8 @@ Example features:
 > Rename the sketch `New Button` and save it.
 >
 > Then write that name in your sprint notes.
+
+<br><br>
 
 ### 🌟 5,000 Fake Bonus Points! 🌟
 
