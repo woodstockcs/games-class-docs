@@ -9,5 +9,5 @@ gem "just-the-docs", "0.10.0" # pinned to the current release
 gem "jekyll-github-metadata"
 gem "jekyll-target-blank"
 
-gem "sass-embedded", "~> 1.78.0"  # to suppress deprecation warnings
+gem "sass-embedded", "~> 1.82.0"  # to suppress deprecation warnings
 # for https://github.com/jekyll/jekyll/issues/9686 
