@@ -11,6 +11,16 @@
 
         });
 
+        
+        for (let floor of floors) {
+            floor.on("up_button_pressed", function() {
+                elevator.goToFloor(floor.floorNum())
+            })
+            floor.on("down_button_pressed", function() {
+                elevator.goToFloor(floor.floorNum())
+            }) 
+        }
+        
     },
     update: function(dt, elevators, floors) {
         // We normally don't need to do anything here
