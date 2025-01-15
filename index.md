@@ -5,6 +5,7 @@ layout: home
 ---
 
 # elevator
+
 [elevator code](https://github.com/woodstockcs/games-class-docs/blob/main/elevator-saga.js)
 
 # terrain
@@ -29,3 +30,9 @@ function draw() {
   updatePixels();
 }
 ```
+
+# experiments
+
+- [ocr from video](./experiments/ocr-test.html)
+- [video-code sync](./experiments/test.html)
+- [p5 widget](./experiments/widget.html)
