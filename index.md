@@ -36,3 +36,6 @@ function draw() {
 - [ocr from video](./experiments/ocr-test.html)
 - [video-code sync](./experiments/test.html)
 - [p5 widget](./experiments/widget.html)
+
+# puzzles
+- https://logsandroots.wordpress.com/2025/01/13/differences/?utm_source=substack&utm_medium=email
