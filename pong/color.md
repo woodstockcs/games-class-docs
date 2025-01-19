@@ -1,11 +1,11 @@
 ---
-title: Drawing Shapes
+title: Color
 nav_order: 2
 parent: Pong
 layout: default
 ---
 
-# Drawing Shapes
+# Color
 
 ## Purpose
 
