@@ -1,6 +1,6 @@
 ---
 title: A Dark Room
-nav_order: 2
+nav_order: 4
 has_children: true
 layout: default
 ---
