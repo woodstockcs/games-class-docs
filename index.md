@@ -39,3 +39,6 @@ function draw() {
 
 # puzzles
 - https://logsandroots.wordpress.com/2025/01/13/differences/?utm_source=substack&utm_medium=email
+
+---
+[THE FORM AT THE BOTTOM](https://docs.google.com/forms/d/e/1FAIpQLScHn0jnRI-LFoaxY4xIqheIUgCwvAxQUGn_B9VBkJcwVwywXA/viewform)
