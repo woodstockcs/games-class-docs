@@ -2,37 +2,36 @@
 title: Ball
 nav_order: 2
 parent: Pong
-layout: default
+layout: exercises
 ---
 
 # Ball
 
 ## Purpose
 
-Learn how to tell the computer where to put dots on the screen. Just like finding places on a map, we'll use a coordinate system to place points exactly where we want them in our game.
+Learn to draw circles with different locations and sizes.
 
 ## Warmup
 
 1. When you play Battleship, how do you tell your opponent where you're attacking? What two pieces of information do you need?
-2. In Minecraft, what do the three numbers mean that appear when you press F3? Which two will we care about for 2D games?
-3. [Draw coordinate plane] If you go right 3 and up 2 from the origin, what point do you reach?
-4. When you're looking at a seating chart, how do you know which seat is yours? What information do you need?
-5. In Chess, how do you tell someone which square you're moving to? What system does Chess use?
-6. On your graph paper, plot these points from different contexts:
+2. [Draw coordinate plane] If you go right 3 and up 2 from the origin, what point do you reach?
+3. When you're looking at a seating chart, how do you know which seat is yours? What information do you need?
+4. In Chess, how do you tell someone which square you're moving to? What system does Chess use?
+5. On your graph paper, plot these points from different contexts:
    - A battleship attack at B4
    - A chess knight at (2,3)
    - A Minecraft player at X:50 Y:30
-7. What's similar about all these coordinate systems?
-8. What's different about them?
-9. In your notebook, create a coordinate system for:
+6. What's similar about all these coordinate systems?
+7. What's different about them?
+8. In your notebook, create a coordinate system for:
    - A phone's number pad
    - A vending machine's selection grid
-10. If you were writing code to press "5" on a phone, what coordinates would you use?
-11. If you wanted item B3 from a vending machine, what coordinates would that be?
-12. In the grid below, what are the coordinates of point A? [Teacher note: Draw a 5x5 grid with point A at (2,3)]
-13. If you're giving directions to a friend in Minecraft, what two pieces of information do they need to find your exact location?
-14. Complete the pattern: (0,0), (10,0), (20,0), **\_**, **\_**
-15. If our game screen is 100 pixels wide, what would be the coordinate of a dot exactly in the middle?
+9. If you were writing code to press "5" on a phone, what coordinates would you use?
+10. If you wanted item B3 from a vending machine, what coordinates would that be?
+11. In the grid below, what are the coordinates of point A? [Teacher note: Draw a 5x5 grid with point A at (2,3)]
+12. If you're giving directions to a friend in Minecraft, what two pieces of information do they need to find your exact location?
+13. Complete the pattern: (0,0), (10,0), (20,0), **\_**, **\_**
+14. If our game screen is 100 pixels wide, what would be the coordinate of a dot exactly in the middle?
 
 ## Problem
 
@@ -42,44 +41,13 @@ Our pong ball is lost in space! We need to learn how to tell the computer exactl
 
 Here are some beginning attempts at drawing a paddle from students who are just starting to learn p5.js:
 
-Maria says: "Maybe we can write something like: ball.right(50) ball.up(30)"
-James suggests: "What if we do: putBall(right edge)"
-Alex thinks: "Let's try: moveBall(over=middle, down=bottom)"
+1. Maria says: "Maybe we can write something like: ball.right(50) ball.up(30)"
+1. James suggests: "What if we do: putBall(right edge)"
+1. Alex thinks: "Let's try: moveBall(over=middle, down=bottom)"
 
 ## Examples
 
-```javascript
-// Single points at different locations
-dot(50, 50);
-dot(0, 0);
-dot(100, 100);
-dot(25, 75);
-```
-
-Here's how dots are used in a simple star field:
-
-```javascript
-// Draw some stars
-dot(20, 15); // top left star
-dot(80, 25); // top right star
-dot(50, 90); // bottom star
-```
-
-Here's how dots are used in a connect-the-dots game:
-
-```javascript
-// Draw dots to connect
-dot(10, 10); // first dot
-dot(30, 30); // second dot
-dot(50, 10); // third dot
-```
-
-Starter code for our Pong ball:
-
-```javascript
-// Draw ball in corner
-dot(100, 100);
-```
+[code](./pong/ball-code.html)
 
 ## Notes
 
