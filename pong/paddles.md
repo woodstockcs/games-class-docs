@@ -64,3 +64,82 @@ draw rectangle x=20 y=100 width=10 height=60
    - Adding a clear comment that explains what each number does
 
 4. CHALLENGE: The right paddle in Pong is a mirror of the left paddle. How would you change the starter code to draw the right paddle instead? (Hint: the game screen is 400 pixels wide)
+
+## Essential Knowledge
+1.   A canvas is a drawing area with specified width and height in pixels.
+1.   Functions are instructions that tell a computer what to do.
+1.   Function syntax requires the function name followed by parentheses containing arguments.
+1.   Arguments are values that modify function execution and must be ordered and comma-separated.
+1.   Functions require varying numbers of arguments ranging from zero to many.
+1.   Documentation shows programmers how to use functions and their arguments.
+  
+## Check Your Understanding
+Q: What describes a canvas in computer graphics?
+
+a) A drawing area with specified width and height in pixels
+
+b) A drawing area with infinite size that grows as needed
+
+c) A drawing area that automatically adjusts to screen size
+
+d) A drawing area measured only in percentages of screen size
+
+---
+
+Q: Which best defines a function in programming?
+
+a) Instructions that tell a computer what to do
+
+b) A way to store data in a computer's memory
+
+c) A mathematical formula for solving equations
+
+d) A special type of variable that changes over time
+
+---
+
+Q: What is the correct syntax for calling a function?
+
+a) functionName(arguments)
+
+b) arguments(functionName)
+
+c) functionName[arguments]
+
+d) (arguments)functionName
+
+---
+
+Q: How should arguments be provided to a function?
+
+a) In correct order, separated by commas
+
+b) In any order, separated by spaces
+
+c) In correct order, separated by semicolons
+
+d) In any order, separated by commas
+
+---
+
+Q: How many arguments does a function need?
+
+a) It varies depending on the specific function
+
+b) Always exactly two arguments
+
+c) At least one argument
+
+d) Always three or more arguments
+
+---
+
+Q: What is the primary purpose of programming documentation?
+
+a) To show how to use functions and their arguments
+
+b) To explain how computers work internally
+
+c) To list all possible programming errors
+
+d) To provide the history of the programming language
