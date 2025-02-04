@@ -42,6 +42,14 @@ draw rectangle x=20 y=100 width=10 height=60
 
 <iframe width="470" height="402" src="https://edpuzzle.com/embed/assignments/67a2622e35694a91716d114d/watch" frameborder="0" allowfullscreen></iframe>
 
+... or watch the video on youtube ([0:00 - 10:46 at this link](https://www.youtube.com/watch?v=c3TeLi6Ns1E)) and answer these questions on a sheet of paper:
+
+- What are two other words that mean "instruction" in programming?
+- What is the area where you draw called?
+- In your own words - what is an argument to a function?
+- Daniel says that learning to program is not just learning to code, but is also ...
+- What is the difference between setup() and draw(), according to the video?
+- Write a 1-3 sentence summary of the video.
 
 
 ## Practice
