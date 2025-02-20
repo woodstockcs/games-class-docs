@@ -9,20 +9,17 @@ layout: default
 
 ## Purpose
 
-Learn how basic shapes are drawn on a computer screen so we can create and control the paddles and ball in our Pong game.
+Learn how basic shapes are drawn on a computer screen.
 
 ## Warmup
 
-1. On a coordinate grid, what are the coordinates of point A? [Show a simple grid with a point marked "A" at (3,2)]
-
-2. Fill in the blanks: A rectangle needs ** and ** to describe its size.
-3. If you move 3 units right and 4 units up from (0,0), where do you end up? Plot it on your mini-whiteboard.
-
-4. True or False: On a coordinate grid, moving up increases the y-coordinate.
+1. On a 100x100 coordinate grid, what are the coordinates of some points near the edge?
+2. Fill in the blanks: A rectangle needs __ and __ to describe its size.
+3. True or False: On the p5js coordinate grid, the point (0,0) is in the upper-left.
 
 ## Problem
 
-Our Pong game needs a ball and two paddles, but right now our screen is completely empty! We need to learn how to draw shapes in specific places so we can create these game elements.
+Our Pong game needs paddles.
 
 ## Ideas
 
@@ -40,64 +37,20 @@ putOnScreen(rectangle)
 draw rectangle x=20 y=100 width=10 height=60
 ```
 
-## Examples
-
-Single shape examples:
-
-```javascript
-rect(30, 20, 55, 55);
-rect(200, 100, 20, 150);
-circle(100, 100, 50);
-circle(250, 250, 30);
-```
-
-Example of paddle and ball in a different game (Breakout):
-
-```javascript
-// Draw the player's paddle at bottom of screen
-rect(mouseX, 350, 80, 20);
-
-// Draw the bouncing ball
-circle(150, ballY, 15);
-```
-
-Example of a basic spaceship game paddle:
-
-```javascript
-// Draw player's ship that moves left/right
-rect(shipX, 380, 40, 20);
-```
-
-STARTER CODE for our Pong paddle (needs improvement):
-
-```javascript
-// Draw left paddle
-rect(0, 0, 20, 100);
-```
 
 ## Notes
 
-When we draw shapes in p5.js, we need to tell the computer exactly where to put them and how big to make them. Here's how the numbers work:
+<iframe width="470" height="402" src="https://edpuzzle.com/embed/assignments/67a2622e35694a91716d114d/watch" frameborder="0" allowfullscreen></iframe>
 
-For rectangles (like our paddles):
+... or watch the video on youtube ([0:00 - 10:46 at this link](https://www.youtube.com/watch?v=c3TeLi6Ns1E)) and answer these questions on a sheet of paper:
 
-- First number: how far from the left edge (x position)
-- Second number: how far from the top edge (y position)
-- Third number: how wide to make it
-- Fourth number: how tall to make it
+- What are two other words that mean "instruction" in programming?
+- What is the area where you draw called?
+- In your own words - what is an argument to a function?
+- Daniel says that learning to program is not just learning to code, but is also ...
+- What is the difference between setup() and draw(), according to the video?
+- Write a 1-3 sentence summary of the video.
 
-For circles (like our ball):
-
-- First number: how far from the left edge (x position)
-- Second number: how far from the top edge (y position)
-- Third number: how big to make it (diameter)
-
-Key Vocabulary:
-**Coordinates**: Numbers that tell us exactly where something is on the screen
-
-- Like a GPS location for your house
-- Like seat numbers in a movie theater
-- Like the street address of your favorite restaurant
 
 ## Practice
 
@@ -106,9 +59,87 @@ Key Vocabulary:
 2. Our paddle is 20 pixels wide and 100 pixels tall. Would these be good dimensions for a Pong paddle? Why or why not?
 
 3. Improve the starter code by:
-
    - Moving the paddle to a better position
    - Adjusting the size if needed
    - Adding a clear comment that explains what each number does
 
 4. CHALLENGE: The right paddle in Pong is a mirror of the left paddle. How would you change the starter code to draw the right paddle instead? (Hint: the game screen is 400 pixels wide)
+
+## Essential Knowledge
+1.   A canvas is a drawing area with specified width and height in pixels.
+1.   Functions are instructions that tell a computer what to do.
+1.   Function syntax requires the function name followed by parentheses containing arguments.
+1.   Arguments are values that modify function execution and must be ordered and comma-separated.
+1.   Functions require varying numbers of arguments ranging from zero to many.
+1.   Documentation shows programmers how to use functions and their arguments.
+  
+## Check Your Understanding
+Q: What describes a canvas in computer graphics?
+
+a) A drawing area with specified width and height in pixels
+
+b) A drawing area with infinite size that grows as needed
+
+c) A drawing area that automatically adjusts to screen size
+
+d) A drawing area measured only in percentages of screen size
+
+---
+
+Q: Which best defines a function in programming?
+
+a) Instructions that tell a computer what to do
+
+b) A way to store data in a computer's memory
+
+c) A mathematical formula for solving equations
+
+d) A special type of variable that changes over time
+
+---
+
+Q: What is the correct syntax for calling a function?
+
+a) functionName(arguments)
+
+b) arguments(functionName)
+
+c) functionName[arguments]
+
+d) (arguments)functionName
+
+---
+
+Q: How should arguments be provided to a function?
+
+a) In correct order, separated by commas
+
+b) In any order, separated by spaces
+
+c) In correct order, separated by semicolons
+
+d) In any order, separated by commas
+
+---
+
+Q: How many arguments does a function need?
+
+a) It varies depending on the specific function
+
+b) Always exactly two arguments
+
+c) At least one argument
+
+d) Always three or more arguments
+
+---
+
+Q: What is the primary purpose of programming documentation?
+
+a) To show how to use functions and their arguments
+
+b) To explain how computers work internally
+
+c) To list all possible programming errors
+
+d) To provide the history of the programming language
