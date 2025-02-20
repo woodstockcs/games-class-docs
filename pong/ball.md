@@ -1,5 +1,5 @@
 ---
-title: Ball
+title: 1.1 Ball
 nav_order: 2
 parent: Pong
 layout: exercises

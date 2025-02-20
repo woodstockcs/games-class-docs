@@ -1,5 +1,5 @@
 ---
-title: Paddles
+title: 1.2 Paddles
 nav_order: 3
 parent: Pong
 layout: default
@@ -46,7 +46,7 @@ draw rectangle x=20 y=100 width=10 height=60
 
 ## Exploration
 
-[paper]()
+[paper](https://docs.google.com/document/d/1GryVBCmC6aTIsH8tuoXG9Vobt_abrSm6mHAOydXrUbo/edit?tab=t.0)
 
 ## Examples
 
@@ -66,8 +66,6 @@ draw rectangle x=20 y=100 width=10 height=60
 - Write a 1-3 sentence summary of the video.
 
 ## Vocab
-
-**term**: definition
 
 ## Practice
 
