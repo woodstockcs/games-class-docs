@@ -30,11 +30,9 @@ By the end of this activity, you should be able to:
 ## Problem
 
 We need to learn how to tell the computer exactly where to place shapes on the screen.
-We need to learn how to tell the computer exactly where to place shapes on the screen.
 
 ## Ideas
 
-Here are some beginning attempts at drawing a ball from students who are just starting to learn p5.js:
 Here are some beginning attempts at drawing a ball from students who are just starting to learn p5.js:
 
 1. Maria says: "Maybe we can write something like: ball.right(50) ball.up(30)"

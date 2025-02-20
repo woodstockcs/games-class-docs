@@ -11,10 +11,17 @@ layout: default
 
 Learn how basic shapes are drawn on a computer screen.
 
+## Learning Objectives
+
+By the end of this activity, you should be able to:
+
+- aaa
+- bbb
+
 ## Warmup
 
 1. On a 100x100 coordinate grid, what are the coordinates of some points near the edge?
-2. Fill in the blanks: A rectangle needs __ and __ to describe its size.
+2. Fill in the blanks: A rectangle needs ** and ** to describe its size.
 3. True or False: On the p5js coordinate grid, the point (0,0) is in the upper-left.
 
 ## Problem
@@ -37,7 +44,6 @@ putOnScreen(rectangle)
 draw rectangle x=20 y=100 width=10 height=60
 ```
 
-
 ## Notes
 
 <iframe width="470" height="402" src="https://edpuzzle.com/embed/assignments/67a2622e35694a91716d114d/watch" frameborder="0" allowfullscreen></iframe>
@@ -51,7 +57,6 @@ draw rectangle x=20 y=100 width=10 height=60
 - What is the difference between setup() and draw(), according to the video?
 - Write a 1-3 sentence summary of the video.
 
-
 ## Practice
 
 1. Look at the starter code. What's wrong with putting the paddle at (0,0)? Where would be a better position for the left paddle in Pong?
@@ -59,6 +64,7 @@ draw rectangle x=20 y=100 width=10 height=60
 2. Our paddle is 20 pixels wide and 100 pixels tall. Would these be good dimensions for a Pong paddle? Why or why not?
 
 3. Improve the starter code by:
+
    - Moving the paddle to a better position
    - Adjusting the size if needed
    - Adding a clear comment that explains what each number does
@@ -66,14 +72,16 @@ draw rectangle x=20 y=100 width=10 height=60
 4. CHALLENGE: The right paddle in Pong is a mirror of the left paddle. How would you change the starter code to draw the right paddle instead? (Hint: the game screen is 400 pixels wide)
 
 ## Essential Knowledge
-1.   A canvas is a drawing area with specified width and height in pixels.
-1.   Functions are instructions that tell a computer what to do.
-1.   Function syntax requires the function name followed by parentheses containing arguments.
-1.   Arguments are values that modify function execution and must be ordered and comma-separated.
-1.   Functions require varying numbers of arguments ranging from zero to many.
-1.   Documentation shows programmers how to use functions and their arguments.
-  
+
+1.  A canvas is a drawing area with specified width and height in pixels.
+1.  Functions are instructions that tell a computer what to do.
+1.  Function syntax requires the function name followed by parentheses containing arguments.
+1.  Arguments are values that modify function execution and must be ordered and comma-separated.
+1.  Functions require varying numbers of arguments ranging from zero to many.
+1.  Documentation shows programmers how to use functions and their arguments.
+
 ## Check Your Understanding
+
 Q: What describes a canvas in computer graphics?
 
 a) A drawing area with specified width and height in pixels
