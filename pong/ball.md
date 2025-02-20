@@ -26,9 +26,6 @@ By the end of this activity, you should be able to:
 1. If you're giving directions to a friend in Minecraft, what two pieces of information do they need to find your exact location?
 1. Complete the pattern: (0,0), (10,0), (20,0), **\_**, **\_**
 1. If our game screen is 100 pixels wide, what would be the coordinate of a dot exactly in the middle?
-1. If you're giving directions to a friend in Minecraft, what two pieces of information do they need to find your exact location?
-1. Complete the pattern: (0,0), (10,0), (20,0), **\_**, **\_**
-1. If our game screen is 100 pixels wide, what would be the coordinate of a dot exactly in the middle?
 
 ## Problem
 
@@ -73,16 +70,13 @@ When we place a dot, we always need exactly two numbers to tell p5 WHERE to draw
 ## Practice
 
 1. Fix the Bug
-1. Fix the Bug
 
 ```javascript
-// Move this dot so it appears on the screen
 // Move this dot so it appears on the screen
 dot(-10, 50);
 ```
 
 2. Perfect Center
-3. Perfect Center
 
 ```javascript
 // Move this dot to the exact center of the canvas
@@ -90,28 +84,23 @@ dot(20, 75);
 ```
 
 3. Distance Game
-4. Distance Game
 
 ```javascript
 // Add two dots that are exactly 50 pixels apart.
 ```
 
 4. Rectangle
-5. Rectangle
 
 ```javascript
 // These dots mark two corners. Add two more dots
-// to make four corners of a rectangle.
 // to make four corners of a rectangle.
 dot(20, 20);
 dot(80, 60);
 ```
 
 5. Pattern Start
-6. Pattern Start
 
 ```javascript
-// Add at least 3 dots to start a clear pattern.
 // Add at least 3 dots to start a clear pattern.
 // What makes a pattern "clear" to other coders?
 dot(10, 10);
@@ -125,7 +114,6 @@ dot(10, 10);
 ```
 
 7. Raindrop Animation
-8. Raindrop Animation
 
 ```javascript
 // These are frames of a raindrop falling.
@@ -136,10 +124,8 @@ dot(50, 25); // frame 2
 ```
 
 8. Basketball Shots
-9. Basketball Shots
 
 ```javascript
-// Plot a bunch of dots showing the arc of a perfect
 // Plot a bunch of dots showing the arc of a perfect
 // basketball shot from (10,90) to (90,90)
 dot(10, 90); // player
@@ -147,11 +133,9 @@ dot(90, 90); // hoop
 ```
 
 9. Secret Letter
-10. Secret Letter
 
 ```javascript
 // These dots spell a letter.
-// Add more dots to spell the next letter
 // Add more dots to spell the next letter
 dot(20, 20);
 dot(20, 30);
