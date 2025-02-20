@@ -49,6 +49,8 @@ Here are some beginning attempts at drawing a ball from students who are just st
 
 ## Notes
 
+[slides](https://docs.google.com/presentation/d/1JG8f2rE-iB_o8YhYO2yhaa_qIzYbrRf4bP1SrnsyFcE/edit#slide=id.p)
+
 The p5.js coordinate grid works like a giant piece of graph paper. The top-left corner is (0,0).
 
 - Moving right increases the first number (x-coordinate)
@@ -139,8 +141,6 @@ dot(20, 20);
 dot(20, 30);
 dot(20, 40);
 ```
-
-## Exercises
 
 ## Essential Knowledge
 

@@ -29,7 +29,7 @@ layout: default
 
 ## Practice
 
-## Exercises
+[paper](https://docs.google.com/document/d/1w_VEqXi05cmT0ANkbE3aNlYw4_ZKg4tqQZLd6-3RE9w/edit?tab=t.0)
 
 ## Essential Knowledge
 

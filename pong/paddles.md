@@ -54,6 +54,8 @@ draw rectangle x=20 y=100 width=10 height=60
 
 ## Notes
 
+[slides](https://docs.google.com/presentation/d/1kGmrjCXkQPWAmClQIjAHVyA8P-qDLglhC82HjOFaMcA/edit#slide=id.g2b4e0575649_0_53)
+
 <iframe width="470" height="402" src="https://edpuzzle.com/embed/assignments/67a2622e35694a91716d114d/watch" frameborder="0" allowfullscreen></iframe>
 
 ... or watch the video on youtube ([0:00 - 10:46 at this link](https://www.youtube.com/watch?v=c3TeLi6Ns1E)) and answer these questions on a sheet of paper:
@@ -69,19 +71,10 @@ draw rectangle x=20 y=100 width=10 height=60
 
 ## Practice
 
-## Exercises
+[paper](https://docs.google.com/document/d/1rB4IF8YrNFUEMukr4nowoBDw2qdl_UjlBCE5YQ-BzDY/edit?tab=t.0)
 
-1. Look at the [starter code](). What's wrong with putting the paddle at (0,0)? Where would be a better position for the left paddle in Pong?
-
-2. Our paddle is 20 pixels wide and 100 pixels tall. Would these be good dimensions for a Pong paddle? Why or why not?
-
-3. Improve the starter code by:
-
-   - Moving the paddle to a better position
-   - Adjusting the size if needed
-   - Adding a clear comment that explains what each number does
-
-4. CHALLENGE: The right paddle in Pong is a mirror of the left paddle. How would you change the starter code to draw the right paddle instead? (Hint: the game screen is 400 pixels wide)
+[another](https://docs.google.com/document/d/10G9-6NKDfTo7vXoEnh3-NO8gUlBRQHy-E8QyrUlfzKQ/edit?tab=t.0)
+[maybe the same?](https://docs.google.com/document/d/1hZC1ETVl_gdJlHIYPisutFcbMxIwF5u39-lwlsS6Y1c/edit?tab=t.0)
 
 ## Essential Knowledge
 

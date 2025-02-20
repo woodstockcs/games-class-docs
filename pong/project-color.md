@@ -5,7 +5,7 @@ parent: Pong
 layout: default
 ---
 
-# Color
+# Project Color
 
 ## Purpose
 

@@ -17,6 +17,8 @@ layout: default
 
 ## Exploration
 
+[paper](https://docs.google.com/document/d/1zGQMYxx9EiKMBuMnx0Gkocl-lRQx_-X8nw70CLDTdmk/edit?tab=t.0)
+
 ## Examples
 
 ## Notes
