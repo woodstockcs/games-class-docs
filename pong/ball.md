@@ -139,3 +139,9 @@ dot(20, 20);
 dot(20, 30);
 dot(20, 40);
 ```
+
+## Exercises
+
+## Essential Knowledge
+
+## Check Your Understanding

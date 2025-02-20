@@ -44,6 +44,14 @@ putOnScreen(rectangle)
 draw rectangle x=20 y=100 width=10 height=60
 ```
 
+## Exploration
+
+[paper]()
+
+## Examples
+
+[code]()
+
 ## Notes
 
 <iframe width="470" height="402" src="https://edpuzzle.com/embed/assignments/67a2622e35694a91716d114d/watch" frameborder="0" allowfullscreen></iframe>
@@ -57,9 +65,15 @@ draw rectangle x=20 y=100 width=10 height=60
 - What is the difference between setup() and draw(), according to the video?
 - Write a 1-3 sentence summary of the video.
 
+## Vocab
+
+**term**: definition
+
 ## Practice
 
-1. Look at the starter code. What's wrong with putting the paddle at (0,0)? Where would be a better position for the left paddle in Pong?
+## Exercises
+
+1. Look at the [starter code](). What's wrong with putting the paddle at (0,0)? Where would be a better position for the left paddle in Pong?
 
 2. Our paddle is 20 pixels wide and 100 pixels tall. Would these be good dimensions for a Pong paddle? Why or why not?
 
