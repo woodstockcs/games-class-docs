@@ -1,6 +1,6 @@
 ---
 title: 2.2 RGB
-nav_order: 6
+nav_order: 220
 parent: Pong
 layout: default
 ---

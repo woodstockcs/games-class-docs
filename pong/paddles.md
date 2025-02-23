@@ -1,6 +1,6 @@
 ---
 title: 1.2 Paddles
-nav_order: 3
+nav_order: 120
 parent: Pong
 layout: default
 ---

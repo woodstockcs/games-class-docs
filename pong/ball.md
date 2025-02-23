@@ -1,6 +1,6 @@
 ---
 title: 1.1 Ball
-nav_order: 2
+nav_order: 110
 parent: Pong
 layout: exercises
 ---

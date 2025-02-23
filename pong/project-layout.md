@@ -1,6 +1,6 @@
 ---
-title: 1.3 Project Layout
-nav_order: 4
+title: 1.4 Project Layout
+nav_order: 130
 parent: Pong
 layout: default
 ---
