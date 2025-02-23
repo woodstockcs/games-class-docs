@@ -1,11 +1,11 @@
 ---
-title: 1.4 Project Layout
+title: 1.4 Layout Project
 nav_order: 130
 parent: Pong
 layout: default
 ---
 
-# Project Layout
+# Layout Project
 
 ## Purpose
 

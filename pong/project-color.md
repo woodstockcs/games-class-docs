@@ -1,11 +1,11 @@
 ---
-title: 2.4 Project Color
+title: 2.4 Color Project
 nav_order: 240
 parent: Pong
 layout: default
 ---
 
-# Project Color
+# Color Project
 
 ## Purpose
 
