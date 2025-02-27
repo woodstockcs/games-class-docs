@@ -61,7 +61,7 @@ function draw() {
 }
 ```
 
-### Exploration
+### Part 1: (PAPER) Exploration
 
 1. How many variables are defined at the top of the code?
 2. What values are stored in the variables `circleX` and `circleY`?
@@ -72,14 +72,14 @@ function draw() {
 7. Which functions use the `shapeColor` variable?
 8. What would happen if we changed the value of `shapeColor` from 100 to 255?
 
-### Concept Invention
+### Part 2: (PAPER) Concept Invention
 
 9. Why do you think the programmer created variables instead of just using numbers?
 10. Why do you think the variable for the circle's x-position is named `circleX` rather than just `x`?
 11. What is the advantage of using the `shapeColor` variable instead of repeating the number 100 three times in the code?
 12. If you wanted to change the color of all three shapes that use `shapeColor`, how many lines of code would you need to change?
 
-### Practice
+### Part 3: (ON YOUR COMPUTER) Practice
 
 13. [Click here](https://editor.p5js.org/woodstock-cs/sketches/I23f3iMrZ) to open the code.
 14. Make your own copy of the code (File > Duplicate).
