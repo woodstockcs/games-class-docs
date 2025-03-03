@@ -1,11 +1,11 @@
 ---
-title: 2.3 Functions
+title: 2.3 Functions Vocab
 nav_order: 230
 parent: Pong
 layout: default
 ---
 
-# Functions
+# Functions Vocab
 
 ## Vocab
 
