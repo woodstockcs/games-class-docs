@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Game Lesson</title>
+    <style>
+      body {
+        background-color: #1a202c;
+        color: white;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .header,
+      .section {
+        background-color: #2d3748;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        font-size: 24px;
+        margin: 0;
+      }
+      .button {
+        background-color: #48bb78;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .button:hover {
+        background-color: #38a169;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Lesson 5: Making Things Move</h1>
+        <button onclick="window.print()" class="button">
+          Print Mission Worksheet
+        </button>
+      </div>
+      <div id="mission-briefing" class="section">
+        <h2>MISSION: ANIMATE THE CIRCLE</h2>
+        <p>
+          Welcome, game developer! Your mission is to learn how to
+          create animation in p5.js.
+        </p>
+        <p>
+          By the end of this mission, you'll be able to make objects
+          move across the screen on their own.
+        </p>
+        <button
+          onclick="showSection('training-video')"
+          class="button"
+        >
+          ACCEPT MISSION
+        </button>
+      </div>
+      <div id="training-video" class="section hidden">
+        <h2>TRAINING MODULE</h2>
+        <p>Watch the video segment from Transcript 2.2 (4:10-7:25)</p>
+        <button
+          onclick="showSection('code-challenge')"
+          class="button"
+        >
+          CONTINUE TO CHALLENGE
+        </button>
+      </div>
+      <div id="code-challenge" class="section hidden">
+        <h2>CODING CHALLENGE</h2>
+        <p>Your mission: Make the circle move from left to right.</p>
+        <pre>
+let circleX = 100;
+
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+  ellipse(circleX, 200, 50);
+  circleX = circleX + 1;
+}
+      </pre
+        >
+        <button
+          onclick="showSection('knowledge-check')"
+          class="button"
+        >
+          CHALLENGE COMPLETE
+        </button>
+      </div>
+      <div id="knowledge-check" class="section hidden">
+        <h2>KNOWLEDGE CHECK</h2>
+        <p>Look at this code:</p>
+        <pre>
+let y = 100;
+
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+  ellipse(200, y, 50);
+  y = y + 2;
+}
+      </pre
+        >
+        <p>
+          The circle will move downward (increasing y moves down in
+          p5.js) at a speed of 2 pixels per frame.
+        </p>
+      </div>
+    </div>
+    <script>
+      function showSection(sectionId) {
+        document.querySelectorAll('.section').forEach((section) => {
+          section.classList.add('hidden');
+        });
+        document.getElementById(sectionId).classList.remove('hidden');
+      }
+    </script>
+  </body>
+</html>

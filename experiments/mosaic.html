@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Digital Playground - Class of 9</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1,
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+      p {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+      }
+      #playgroundContainer {
+        width: 600px;
+        height: 600px;
+        margin: 0 auto;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        position: relative;
+        background: #fff;
+      }
+      .student-info {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .student {
+        padding: 15px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .student h3 {
+        margin-top: 0;
+        color: #333;
+      }
+      .student p {
+        text-align: left;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Digital Playground</h1>
+      <p>A collaborative p5.js project by 9 students</p>
+
+      <div id="playgroundContainer"></div>
+
+      <div class="student-info">
+        <div class="student">
+          <h3>Zone (0,0): Ella</h3>
+          <p><strong>Theme:</strong> Bubbles</p>
+          <p>
+            <strong>Interaction:</strong> Click to create bubbles that
+            float upward
+          </p>
+          <p>
+            <strong>Connection:</strong> Bubbles can float into
+            Jordan's zone
+          </p>
+        </div>
+        <div class="student">
+          <h3>Zone (0,1): Jordan</h3>
+          <p><strong>Theme:</strong> Cloud patterns</p>
+          <p>
+            <strong>Interaction:</strong> Move mouse to change wind
+            direction
+          </p>
+          <p>
+            <strong>Connection:</strong> Clouds can drift into
+            neighboring zones
+          </p>
+        </div>
+        <div class="student">
+          <h3>Zone (0,2): Alex</h3>
+          <p><strong>Theme:</strong> Stars</p>
+          <p>
+            <strong>Interaction:</strong> Click to create shooting
+            stars
+          </p>
+          <p>
+            <strong>Connection:</strong> Stars can fall into Taylor's
+            zone
+          </p>
+        </div>
+        <div class="student">
+          <h3>Zone (1,0): Morgan</h3>
+          <p><strong>Theme:</strong> Forest</p>
+          <p><strong>Interaction:</strong> Click to plant trees</p>
+          <p>
+            <strong>Connection:</strong> Birds fly between forest and
+            meadow
+          </p>
+        </div>
+        <div class="student">
+          <h3>Zone (1,1): Taylor</h3>
+          <p><strong>Theme:</strong> Meadow</p>
+          <p><strong>Interaction:</strong> Click to grow flowers</p>
+          <p>
+            <strong>Connection:</strong> Butterflies traverse all
+            zones
+          </p>
+        </div>
+        <div class="student">
+          <h3>Zone (1,2): Casey</h3>
+          <p><strong>Theme:</strong> River</p>
+          <p><strong>Interaction:</strong> Click to create ripples</p>
+          <p>
+            <strong>Connection:</strong> Water flows into Jamie's zone
+          </p>
+        </div>
+        <div class="student">
+          <h3>Zone (2,0): Riley</h3>
+          <p><strong>Theme:</strong> Urban</p>
+          <p>
+            <strong>Interaction:</strong> Click to add city buildings
+          </p>
+          <p>
+            <strong>Connection:</strong> Cars drive between urban
+            areas
+          </p>
+        </div>
+        <div class="student">
+          <h3>Zone (2,1): Jamie</h3>
+          <p><strong>Theme:</strong> Beach</p>
+          <p>
+            <strong>Interaction:</strong> Click to build sandcastles
+          </p>
+          <p><strong>Connection:</strong> Waves connect with river</p>
+        </div>
+        <div class="student">
+          <h3>Zone (2,2): Quinn</h3>
+          <p><strong>Theme:</strong> Coral reef</p>
+          <p>
+            <strong>Interaction:</strong> Move mouse to control fish
+          </p>
+          <p>
+            <strong>Connection:</strong> Fish swim between reef and
+            beach
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Load p5.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+
+    <script>
+      // Main sketch configuration
+      const GRID_ROWS = 3;
+      const GRID_COLS = 3;
+      const ZONE_SIZE = 200;
+      const CANVAS_WIDTH = ZONE_SIZE * GRID_COLS;
+      const CANVAS_HEIGHT = ZONE_SIZE * GRID_ROWS;
+
+      // Global variables
+      let zones = [];
+
+      // Main p5.js sketch
+      function setup() {
+        // Create the canvas inside the container
+        let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+        canvas.parent('playgroundContainer');
+
+        // Initialize student zones
+        initializeZones();
+
+        // Set a consistent frame rate
+        frameRate(30);
+      }
+
+      function draw() {
+        background(240);
+
+        // Update and display all zones
+        for (let zone of zones) {
+          push();
+          translate(zone.x, zone.y);
+          zone.update();
+          zone.display();
+          pop();
+        }
+
+        // Process interactions between zones
+        processInterZoneInteractions();
+      }
+
+      function mousePressed() {
+        // Translate global mouse position to zone-local
+        let zoneCol = floor(mouseX / ZONE_SIZE);
+        let zoneRow = floor(mouseY / ZONE_SIZE);
+
+        // Find the zone that was clicked
+        for (let zone of zones) {
+          if (zone.row === zoneRow && zone.col === zoneCol) {
+            // Adjust mouse coords relative to zone
+            let zoneMouseX = mouseX - zone.x;
+            let zoneMouseY = mouseY - zone.y;
+
+            // Send the click to the zone
+            zone.handleClick(zoneMouseX, zoneMouseY);
+            break;
+          }
+        }
+      }
+
+      function mouseMoved() {
+        // Handle mouse movement similar to clicks
+        let zoneCol = floor(mouseX / ZONE_SIZE);
+        let zoneRow = floor(mouseY / ZONE_SIZE);
+
+        for (let zone of zones) {
+          if (zone.row === zoneRow && zone.col === zoneCol) {
+            let zoneMouseX = mouseX - zone.x;
+            let zoneMouseY = mouseY - zone.y;
+            zone.handleMouseMove(zoneMouseX, zoneMouseY);
+          }
+        }
+      }
+
+      // Initialize the student zones
+      function initializeZones() {
+        // Create each student's zone with position
+        zones.push(new EllaZone(0, 0, 0 * ZONE_SIZE, 0 * ZONE_SIZE));
+        zones.push(
+          new JordanZone(0, 1, 1 * ZONE_SIZE, 0 * ZONE_SIZE)
+        );
+        zones.push(new AlexZone(0, 2, 2 * ZONE_SIZE, 0 * ZONE_SIZE));
+        zones.push(
+          new MorganZone(1, 0, 0 * ZONE_SIZE, 1 * ZONE_SIZE)
+        );
+        zones.push(
+          new TaylorZone(1, 1, 1 * ZONE_SIZE, 1 * ZONE_SIZE)
+        );
+        zones.push(new CaseyZone(1, 2, 2 * ZONE_SIZE, 1 * ZONE_SIZE));
+        zones.push(new RileyZone(2, 0, 0 * ZONE_SIZE, 2 * ZONE_SIZE));
+        zones.push(new JamieZone(2, 1, 1 * ZONE_SIZE, 2 * ZONE_SIZE));
+        zones.push(new QuinnZone(2, 2, 2 * ZONE_SIZE, 2 * ZONE_SIZE));
+      }
+
+      // Process interactions between zones
+      function processInterZoneInteractions() {
+        // Loop through all zones to check for interactions
+        for (let zone of zones) {
+          // Get neighboring zones
+          let neighbors = getNeighbors(zone);
+
+          // Process sharing objects with each neighbor
+          for (let dir in neighbors) {
+            if (neighbors[dir]) {
+              let objsToShare = zone.getObjectsToShare(dir);
+              if (objsToShare && objsToShare.length > 0) {
+                neighbors[dir].receiveObjects(
+                  getOppositeDirection(dir),
+                  objsToShare
+                );
+              }
+            }
+          }
+        }
+      }
+
+      // Get a zone's neighbors in all four directions
+      function getNeighbors(zone) {
+        return {
+          top: getZoneAt(zone.row - 1, zone.col),
+          right: getZoneAt(zone.row, zone.col + 1),
+          bottom: getZoneAt(zone.row + 1, zone.col),
+          left: getZoneAt(zone.row, zone.col - 1),
+        };
+      }
+
+      // Get the opposite direction
+      function getOppositeDirection(dir) {
+        if (dir === 'top') return 'bottom';
+        if (dir === 'right') return 'left';
+        if (dir === 'bottom') return 'top';
+        if (dir === 'left') return 'right';
+        return null;
+      }
+
+      // Get a zone at specific coordinates
+      function getZoneAt(row, col) {
+        // Check if coordinates are valid
+        if (
+          row < 0 ||
+          row >= GRID_ROWS ||
+          col < 0 ||
+          col >= GRID_COLS
+        ) {
+          return null;
+        }
+
+        // Find the zone
+        for (let zone of zones) {
+          if (zone.row === row && zone.col === col) {
+            return zone;
+          }
+        }
+        return null;
+      }
+
+      // Base Zone class that all student zones extend
+      class Zone {
+        constructor(row, col, x, y) {
+          this.row = row;
+          this.col = col;
+          this.x = x;
+          this.y = y;
+          this.objectsToShare = {
+            top: [],
+            right: [],
+            bottom: [],
+            left: [],
+          };
+        }
+
+        update() {
+          // This should be overridden by student zones
+        }
+
+        display() {
+          // Draw zone boundary
+          stroke(100);
+          strokeWeight(1);
+          noFill();
+          rect(0, 0, ZONE_SIZE, ZONE_SIZE);
+
+          // Display zone info for debugging
+          fill(0);
+          textSize(10);
+          text(`(${this.row},${this.col})`, 5, 15);
+        }
+
+        handleClick(x, y) {
+          // Override in student zones
+        }
+
+        handleMouseMove(x, y) {
+          // Override in student zones
+        }
+
+        getObjectsToShare(direction) {
+          // Get objects that should move to neighboring zones
+          return this.objectsToShare[direction];
+        }
+
+        receiveObjects(fromDirection, objects) {
+          // Receive objects from neighboring zones
+          // Override in student zones
+        }
+
+        // Clear objects to share for next frame
+        clearObjectsToShare() {
+          this.objectsToShare = {
+            top: [],
+            right: [],
+            bottom: [],
+            left: [],
+          };
+        }
+      }
+
+      // Ella's Zone (0,0) - Bubbles
+      class EllaZone extends Zone {
+        constructor(row, col, x, y) {
+          super(row, col, x, y);
+          this.bubbles = [];
+          this.backgroundColor = [173, 216, 230]; // Light blue
+        }
+
+        update() {
+          // Update bubbles
+          for (let i = this.bubbles.length - 1; i >= 0; i--) {
+            let bubble = this.bubbles[i];
+
+            // Move bubbles upward
+            bubble.y -= bubble.speed;
+
+            // Random horizontal drift
+            bubble.x += random(-0.5, 0.5);
+
+            // Remove bubbles that go offscreen
+            if (bubble.y + bubble.size < 0) {
+              this.bubbles.splice(i, 1);
+            }
+
+            // Check if bubble should move to the zone above
+            if (bubble.y < 0 && bubble.y + bubble.size > 0) {
+              this.objectsToShare.top.push({
+                type: 'bubble',
+                x: bubble.x,
+                y: ZONE_SIZE + bubble.y,
+                size: bubble.size,
+                speed: bubble.speed,
+                color: bubble.color,
+              });
+              this.bubbles.splice(i, 1);
+            }
+          }
+        }
+
+        display() {
+          // Draw background
+          background(this.backgroundColor);
+
+          // Draw bubbles
+          noStroke();
+          for (let bubble of this.bubbles) {
+            fill(
+              bubble.color[0],
+              bubble.color[1],
+              bubble.color[2],
+              150
+            );
+            ellipse(bubble.x, bubble.y, bubble.size);
+
+            // Bubble highlight
+            fill(255, 255, 255, 100);
+            ellipse(
+              bubble.x - bubble.size / 4,
+              bubble.y - bubble.size / 4,
+              bubble.size / 3
+            );
+          }
+
+          // Draw zone boundary
+          super.display();
+        }
+
+        handleClick(x, y) {
+          // Create new bubbles on click
+          for (let i = 0; i < 5; i++) {
+            this.bubbles.push({
+              x: x + random(-20, 20),
+              y: y + random(-20, 20),
+              size: random(10, 30),
+              speed: random(0.5, 2),
+              color: [random(100, 200), random(100, 200), 255],
+            });
+          }
+        }
+
+        receiveObjects(fromDirection, objects) {
+          if (fromDirection === 'bottom') {
+            for (let obj of objects) {
+              if (obj.type === 'bubble') {
+                this.bubbles.push({
+                  x: obj.x,
+                  y: obj.y,
+                  size: obj.size,
+                  speed: obj.speed,
+                  color: obj.color,
+                });
+              }
+            }
+          }
+        }
+      }
+
+      // Jordan's Zone (0,1) - Cloud patterns
+      class JordanZone extends Zone {
+        constructor(row, col, x, y) {
+          super(row, col, x, y);
+          this.clouds = [];
+          this.windDirection = 1; // 1 = right, -1 = left
+          this.windSpeed = 0.5;
+          this.backgroundColor = [135, 206, 235]; // Sky blue
+
+          // Initialize some clouds
+          for (let i = 0; i < 5; i++) {
+            this.clouds.push(
+              this.createCloud(random(ZONE_SIZE), random(ZONE_SIZE))
+            );
+          }
+        }
+
+        createCloud(x, y) {
+          return {
+            x: x,
+            y: y,
+            width: random(30, 70),
+            height: random(15, 30),
+            speed: random(0.2, 0.6),
+            color: [255, 255, 255, random(150, 220)],
+          };
+        }
+
+        update() {
+          // Clear previous objects to share
+          this.clearObjectsToShare();
+
+          // Update clouds
+          for (let i = this.clouds.length - 1; i >= 0; i--) {
+            let cloud = this.clouds[i];
+
+            // Move cloud according to wind
+            cloud.x += this.windDirection * cloud.speed;
+
+            // Check if cloud moves to neighboring zones
+            if (cloud.x + cloud.width < 0) {
+              // Moving left out of zone
+              this.objectsToShare.left.push({
+                type: 'cloud',
+                x: ZONE_SIZE + cloud.x,
+                y: cloud.y,
+                width: cloud.width,
+                height: cloud.height,
+                speed: cloud.speed,
+                color: cloud.color,
+              });
+              this.clouds.splice(i, 1);
+            } else if (cloud.x > ZONE_SIZE) {
+              // Moving right out of zone
+              this.objectsToShare.right.push({
+                type: 'cloud',
+                x: cloud.x - ZONE_SIZE,
+                y: cloud.y,
+                width: cloud.width,
+                height: cloud.height,
+                speed: cloud.speed,
+                color: cloud.color,
+              });
+              this.clouds.splice(i, 1);
+            }
+          }
+
+          // Create new clouds occasionally
+          if (random() < 0.01 && this.clouds.length < 8) {
+            // Create cloud at the edge based on wind direction
+            let x = this.windDirection > 0 ? -50 : ZONE_SIZE + 50;
+            this.clouds.push(
+              this.createCloud(x, random(ZONE_SIZE / 2))
+            );
+          }
+        }
+
+        display() {
+          // Draw background
+          background(this.backgroundColor);
+
+          // Draw clouds
+          noStroke();
+          for (let cloud of this.clouds) {
+            fill(cloud.color);
+            ellipse(cloud.x, cloud.y, cloud.width, cloud.height);
+            ellipse(
+              cloud.x + cloud.width * 0.3,
+              cloud.y - cloud.height * 0.2,
+              cloud.width * 0.7,
+              cloud.height * 0.9
+            );
+            ellipse(
+              cloud.x - cloud.width * 0.2,
+              cloud.y - cloud.height * 0.1,
+              cloud.width * 0.7,
+              cloud.height * 0.8
+            );
+          }
+
+          // Draw zone boundary
+          super.display();
+        }
+
+        handleMouseMove(x, y) {
+          // Change wind direction based on mouse position
+          this.windDirection = x < ZONE_SIZE / 2 ? -1 : 1;
+          this.windSpeed = map(
+            abs(x - ZONE_SIZE / 2),
+            0,
+            ZONE_SIZE / 2,
+            0.1,
+            1
+          );
+        }
+
+        receiveObjects(fromDirection, objects) {
+          for (let obj of objects) {
+            if (obj.type === 'cloud') {
+              this.clouds.push({
+                x: obj.x,
+                y: obj.y,
+                width: obj.width,
+                height: obj.height,
+                speed: obj.speed,
+                color: obj.color,
+              });
+            }
+          }
+        }
+      }
+
+      // Alex's Zone (0,2) - Stars
+      class AlexZone extends Zone {
+        constructor(row, col, x, y) {
+          super(row, col, x, y);
+          this.stars = [];
+          this.shootingStars = [];
+          this.backgroundColor = [25, 25, 50]; // Dark blue/purple
+
+          // Create initial stars
+          for (let i = 0; i < 50; i++) {
+            this.stars.push({
+              x: random(ZONE_SIZE),
+              y: random(ZONE_SIZE),
+              size: random(1, 3),
+              brightness: random(150, 255),
+              twinkleSpeed: random(0.02, 0.05),
+              twinkleOffset: random(TWO_PI),
+            });
+          }
+        }
+
+        update() {
+          // Clear previous shared objects
+          this.clearObjectsToShare();
+
+          // Twinkle the stars (just a visual effect)
+          for (let star of this.stars) {
+            star.brightness =
+              150 +
+              105 *
+                sin(
+                  frameCount * star.twinkleSpeed + star.twinkleOffset
+                );
+          }
+
+          // Update shooting stars
+          for (let i = this.shootingStars.length - 1; i >= 0; i--) {
+            let star = this.shootingStars[i];
+            star.x += star.speedX;
+            star.y += star.speedY;
+            star.life--;
+
+            // Remove dead stars
+            if (star.life <= 0) {
+              this.shootingStars.splice(i, 1);
+              continue;
+            }
+
+            // Handle stars moving to zones below
+            if (star.y > ZONE_SIZE) {
+              this.objectsToShare.bottom.push({
+                type: 'shootingStar',
+                x: star.x,
+                y: star.y - ZONE_SIZE,
+                speedX: star.speedX,
+                speedY: star.speedY,
+                size: star.size,
+                life: star.life,
+              });
+              this.shootingStars.splice(i, 1);
+            }
+          }
+        }
+
+        display() {
+          // Draw background
+          background(this.backgroundColor);
+
+          // Draw stars
+          noStroke();
+          for (let star of this.stars) {
+            fill(star.brightness);
+            ellipse(star.x, star.y, star.size);
+          }
+
+          // Draw shooting stars
+          for (let star of this.shootingStars) {
+            push();
+            translate(star.x, star.y);
+            rotate(atan2(star.speedY, star.speedX));
+
+            // Draw star with trail
+            fill(255, 255, 200, 200);
+            ellipse(0, 0, star.size);
+
+            // Draw tail
+            noFill();
+            stroke(255, 255, 200, 150);
+            beginShape();
+            for (let i = 0; i < 10; i++) {
+              let px = -i * 4;
+              let py = sin(i * 0.4) * 2;
+              vertex(px, py);
+            }
+            endShape();
+            pop();
+          }
+
+          // Draw zone boundary
+          super.display();
+        }
+
+        handleClick(x, y) {
+          // Create shooting star on click
+          this.shootingStars.push({
+            x: x,
+            y: y,
+            speedX: random(-2, 2),
+            speedY: random(3, 5),
+            size: random(3, 6),
+            life: 60,
+          });
+        }
+
+        receiveObjects(fromDirection, objects) {
+          // Handle objects coming from other zones
+          for (let obj of objects) {
+            if (obj.type === 'shootingStar') {
+              this.shootingStars.push({
+                x: obj.x,
+                y: obj.y,
+                speedX: obj.speedX,
+                speedY: obj.speedY,
+                size: obj.size,
+                life: obj.life,
+              });
+            }
+          }
+        }
+      }
+
+      // Morgan's Zone (1,0) - Forest
+      class MorganZone extends Zone {
+        constructor(row, col, x, y) {
+          super(row, col, x, y);
+          this.trees = [];
+          this.birds = [];
+          this.backgroundColor = [34, 139, 34]; // Forest green
+
+          // Create some initial trees
+          for (let i = 0; i < 5; i++) {
+            this.addTree(
+              random(ZONE_SIZE),
+              ZONE_SIZE - random(10, 30)
+            );
+          }
+        }
+
+        addTree(x, y) {
+          this.trees.push({
+            x: x,
+            y: y,
+            trunkHeight: random(30, 60),
+            trunkWidth: random(5, 12),
+            leafSize: random(20, 40),
+            growthStage: 0, // 0 to 1, controls animation
+          });
+        }
+
+        update() {
+          // Clear previous objects to share
+          this.clearObjectsToShare();
+
+          // Grow trees
+          for (let tree of this.trees) {
+            if (tree.growthStage < 1) {
+              tree.growthStage += 0.02;
+            }
+          }
+
+          // Update birds
+          for (let i = this.birds.length - 1; i >= 0; i--) {
+            let bird = this.birds[i];
+
+            // Move birds
+            bird.x += bird.speedX;
+            bird.wingPhase += 0.2;
+
+            // Check if birds leave the zone
+            if (bird.x > ZONE_SIZE) {
+              this.objectsToShare.right.push({
+                type: 'bird',
+                x: bird.x - ZONE_SIZE,
+                y: bird.y,
+                speedX: bird.speedX,
+                wingPhase: bird.wingPhase,
+                size: bird.size,
+                color: bird.color,
+              });
+              this.birds.splice(i, 1);
+            } else if (bird.x < 0) {
+              this.objectsToShare.left.push({
+                type: 'bird',
+                x: ZONE_SIZE + bird.x,
+                y: bird.y,
+                speedX: bird.speedX,
+                wingPhase: bird.wingPhase,
+                size: bird.size,
+                color: bird.color,
+              });
+              this.birds.splice(i, 1);
+            }
+          }
+
+          // Occasionally create new birds
+          if (random() < 0.01 && this.birds.length < 3) {
+            this.birds.push({
+              x: this.birds.length % 2 === 0 ? 0 : ZONE_SIZE,
+              y: random(50, 100),
+              speedX:
+                this.birds.length % 2 === 0
+                  ? random(1, 2)
+                  : random(-1, -2),
+              wingPhase: 0,
+              size: random(8, 15),
+              color: [
+                random(50, 100),
+                random(50, 100),
+                random(50, 100),
+              ],
+            });
+          }
+        }
+
+        display() {
+          // Draw background
+          background(this.backgroundColor);
+
+          // Draw trees
+          for (let tree of this.trees) {
+            // Draw trunk - scale by growth stage
+            push();
+            translate(tree.x, tree.y);
+            scale(1, tree.growthStage);
+
+            // Trunk
+            fill(139, 69, 19);
+            rect(
+              -tree.trunkWidth / 2,
+              -tree.trunkHeight,
+              tree.trunkWidth,
+              tree.trunkHeight
+            );
+
+            // Leaves
+            fill(0, 100, 0);
+            ellipse(
+              0,
+              -tree.trunkHeight - tree.leafSize / 2,
+              tree.leafSize,
+              tree.leafSize
+            );
+            ellipse(
+              tree.leafSize / 3,
+              -tree.trunkHeight - tree.leafSize / 3,
+              tree.leafSize * 0.8,
+              tree.leafSize * 0.8
+            );
+            ellipse(
+              -tree.leafSize / 3,
+              -tree.trunkHeight - tree.leafSize / 3,
+              tree.leafSize * 0.8,
+              tree.leafSize * 0.8
+            );
+            pop();
+          }
+
+          // Draw birds
+          for (let bird of this.birds) {
+            push();
+            translate(bird.x, bird.y);
+            fill(bird.color);
+            noStroke();
+
+            // Bird body
+            ellipse(0, 0, bird.size, bird.size / 2);
+
+            // Bird head
+            ellipse(bird.size / 2, 0, bird.size / 2, bird.size / 2);
+
+            // Bird wings
+            let wingY = (sin(bird.wingPhase) * bird.size) / 4;
+            triangle(
+              0,
+              0,
+              -bird.size / 2,
+              wingY,
+              bird.size / 3,
+              wingY
+            );
+
+            pop();
+          }
+
+          // Draw zone boundary
+          super.display();
+        }
+
+        handleClick(x, y) {
+          // Plant a tree on click
+          this.addTree(x, ZONE_SIZE - random(10, 30));
+        }
+
+        receiveObjects(fromDirection, objects) {
+          for (let obj of objects) {
+            if (obj.type === 'bird') {
+              this.birds.push({
+                x: obj.x,
+                y: obj.y,
+                speedX: obj.speedX,
+                wingPhase: obj.wingPhase,
+                size: obj.size,
+                color: obj.color,
+              });
+            }
+          }
+        }
+      }
+
+      // Taylor's Zone (1,1) - Meadow
+      class TaylorZone extends Zone {
+        constructor(row, col, x, y) {
+          super(row, col, x, y);
+          this.flowers = [];
+          this.butterflies = [];
+          this.backgroundColor = [152, 251, 152]; // Pale green
+
+          // Create a few initial butterflies
+          for (let i = 0; i < 3; i++) {
+            this.addButterfly(random(ZONE_SIZE), random(ZONE_SIZE));
+          }
+        }
+
+        addFlower(x, y) {
+          this.flowers.push({
+            x: x,
+            y: y,
+            size: random(10, 20),
+            petalColor: [
+              random(150, 255),
+              random(100, 200),
+              random(200, 255),
+            ],
+            centerColor: [random(200, 255), random(200, 255), 50],
+            stemHeight: random(20, 40),
+            stemWidth: random(2, 4),
+            growthStage: 0,
+          });
+        }
+
+        addButterfly(x, y) {
+          this.butterflies.push({
+            x: x,
+            y: y,
+            size: random(10, 15),
+            wingColor: [
+              random(100, 255),
+              random(100, 255),
+              random(100, 255),
+            ],
+            wingPhase: random(TWO_PI),
+            speedX: random(-1, 1),
+            speedY: random(-0.5, 0.5),
+            targetX: random(ZONE_SIZE),
+            targetY: random(ZONE_SIZE),
+          });
+        }
+
+        update() {
+          // Clear previous objects to share
+          this.clearObjectsToShare();
+
+          // Grow flowers
+          for (let flower of this.flowers) {
+            if (flower.growthStage < 1) {
+              flower.growthStage += 0.05;
+            }
+          }
+
+          // Update butterflies
+          for (let i = this.butterflies.length - 1; i >= 0; i--) {
+            let butterfly = this.butterflies[i];
+
+            // Flutter wings
+            butterfly.wingPhase += 0.2;
+
+            // Move toward target
+            let dx = butterfly.targetX - butterfly.x;
+            let dy = butterfly.targetY - butterfly.y;
+            let dist = sqrt(dx * dx + dy * dy);
+
+            if (dist < 5) {
+              // Set new target when close to current target
+              butterfly.targetX = random(ZONE_SIZE);
+              butterfly.targetY = random(ZONE_SIZE);
+            } else {
+              // Move toward target
+              butterfly.x += dx * 0.01;
+              butterfly.y += dy * 0.01;
+            }
+
+            // Add random movement
+            butterfly.x += random(-0.5, 0.5);
+            butterfly.y += random(-0.5, 0.5);
+
+            // Check if butterfly leaves zone
+            if (butterfly.x < 0) {
+              this.objectsToShare.left.push({
+                type: 'butterfly',
+                x: ZONE_SIZE + butterfly.x,
+                y: butterfly.y,
+                size: butterfly.size,
+                wingColor: butterfly.wingColor,
+                wingPhase: butterfly.wingPhase,
+              });
+              this.butterflies.splice(i, 1);
+            } else if (butterfly.x > ZONE_SIZE) {
+              this.objectsToShare.right.push({
+                type: 'butterfly',
+                x: butterfly.x - ZONE_SIZE,
+                y: butterfly.y,
+                size: butterfly.size,
+                wingColor: butterfly.wingColor,
+                wingPhase: butterfly.wingPhase,
+              });
+              this.butterflies.splice(i, 1);
+            } else if (butterfly.y < 0) {
+              this.objectsToShare.top.push({
+                type: 'butterfly',
+                x: butterfly.x,
+                y: ZONE_SIZE + butterfly.y,
+                size: butterfly.size,
+                wingColor: butterfly.wingColor,
+                wingPhase: butterfly.wingPhase,
+              });
+              this.butterflies.splice(i, 1);
+            } else if (butterfly.y > ZONE_SIZE) {
+              this.objectsToShare.bottom.push({
+                type: 'butterfly',
+                x: butterfly.x,
+                y: butterfly.y - ZONE_SIZE,
+                size: butterfly.size,
+                wingColor: butterfly.wingColor,
+                wingPhase: butterfly.wingPhase,
+              });
+              this.butterflies.splice(i, 1);
+            }
+          }
+
+          // Occasionally create new butterflies
+          if (random() < 0.005 && this.butterflies.length < 5) {
+            this.addButterfly(random(ZONE_SIZE), random(ZONE_SIZE));
+          }
+        }
+
+        display() {
+          // Draw background
+          background(this.backgroundColor);
+
+          // Draw flowers
+          for (let flower of this.flowers) {
+            push();
+            translate(flower.x, flower.y);
+            scale(flower.growthStage);
+
+            // Stem
+            stroke(0, 100, 0);
+            strokeWeight(flower.stemWidth);
+            line(0, 0, 0, flower.stemHeight);
+
+            // Petals
+            noStroke();
+            fill(flower.petalColor);
+            for (let p = 0; p < 6; p++) {
+              push();
+              rotate((p * PI) / 3);
+              ellipse(
+                0,
+                -flower.size / 2,
+                flower.size / 2,
+                flower.size
+              );
+              pop();
+            }
+
+            // Center
+            fill(flower.centerColor);
+            ellipse(0, 0, flower.size / 2, flower.size / 2);
+
+            pop();
+          }
+
+          // Draw butterflies
+          for (let butterfly of this.butterflies) {
+            push();
+            translate(butterfly.x, butterfly.y);
+
+            // Wings
+            fill(butterfly.wingColor);
+            noStroke();
+
+            // Left wing
+            push();
+            rotate(PI / 4 + (sin(butterfly.wingPhase) * PI) / 6);
+            ellipse(
+              -butterfly.size / 2,
+              0,
+              butterfly.size,
+              butterfly.size * 1.5
+            );
+            pop();
+
+            // Right wing
+            push();
+            rotate(-PI / 4 - (sin(butterfly.wingPhase) * PI) / 6);
+            ellipse(
+              butterfly.size / 2,
+              0,
+              butterfly.size,
+              butterfly.size * 1.5
+            );
+            pop();
+
+            // Body
+            fill(40);
+            ellipse(0, 0, butterfly.size / 4, butterfly.size);
+
+            pop();
+          }
+
+          // Draw zone boundary
+          super.display();
+        }
+
+        handleClick(x, y) {
+          // Grow a flower on click
+          this.addFlower(x, y);
+        }
+
+        receiveObjects(fromDirection, objects) {
+          for (let obj of objects) {
+            if (obj.type === 'butterfly') {
+              this.butterflies.push({
+                x: obj.x,
+                y: obj.y,
+                size: obj.size,
+                wingColor: obj.wingColor,
+                wingPhase: obj.wingPhase,
+                speedX: random(-1, 1),
+                speedY: random(-0.5, 0.5),
+                targetX: random(ZONE_SIZE),
+                targetY: random(ZONE_SIZE),
+              });
+            }
+          }
+        }
+      }
+
+      // Casey's Zone (1,2) - River
+      class CaseyZone extends Zone {
+        constructor(row, col, x, y) {
+          super(row, col, x, y);
+          this.ripples = [];
+          this.waterParticles = [];
+          this.backgroundColor = [65, 105, 225]; // Royal blue
+
+          // Create initial water particles
+          for (let i = 0; i < 50; i++) {
+            this.addWaterParticle(
+              random(ZONE_SIZE),
+              random(ZONE_SIZE)
+            );
+          }
+        }
+
+        addRipple(x, y) {
+          this.ripples.push({
+            x: x,
+            y: y,
+            radius: 5,
+            maxRadius: random(20, 40),
+            growthRate: random(0.5, 1.5),
+            opacity: 255,
+          });
+        }
+
+        addWaterParticle(x, y) {
+          this.waterParticles.push({
+            x: x,
+            y: y,
+            size: random(2, 6),
+            speedX: random(-0.2, -1),
+            speedY: random(-0.1, 0.1),
+            opacity: random(100, 200),
+          });
+        }
+
+        update() {
+          // Clear previous objects to share
+          this.clearObjectsToShare();
+
+          // Update ripples
+          for (let i = this.ripples.length - 1; i >= 0; i--) {
+            let ripple = this.ripples[i];
+            ripple.radius += ripple.growthRate;
+            ripple.opacity -= 5;
+
+            if (
+              ripple.opacity <= 0 ||
+              ripple.radius >= ripple.maxRadius
+            ) {
+              this.ripples.splice(i, 1);
+            }
+          }
+
+          // Update water particles
+          for (let i = this.waterParticles.length - 1; i >= 0; i--) {
+            let particle = this.waterParticles[i];
+            particle.x += particle.speedX;
+            particle.y += particle.speedY;
+
+            // Respawn particles that go off left edge
+            if (particle.x < 0) {
+              this.objectsToShare.left.push({
+                type: 'waterParticle',
+                x: ZONE_SIZE + particle.x,
+                y: particle.y,
+                size: particle.size,
+                speedX: particle.speedX,
+                speedY: particle.speedY,
+                opacity: particle.opacity,
+              });
+              this.waterParticles.splice(i, 1);
+              this.addWaterParticle(ZONE_SIZE, random(ZONE_SIZE));
+            }
+
+            // Handle bottom edge water flow
+            if (particle.y > ZONE_SIZE) {
+              this.objectsToShare.bottom.push({
+                type: 'waterParticle',
+                x: particle.x,
+                y: particle.y - ZONE_SIZE,
+                size: particle.size,
+                speedX: particle.speedX,
+                speedY: particle.speedY,
+                opacity: particle.opacity,
+              });
+              this.waterParticles.splice(i, 1);
+              this.addWaterParticle(random(ZONE_SIZE), 0);
+            }
+          }
+        }
+
+        display() {
+          // Draw background
+          background(this.backgroundColor);
+
+          // Draw water particles
+          noStroke();
+          for (let particle of this.waterParticles) {
+            fill(255, 255, 255, particle.opacity);
+            ellipse(particle.x, particle.y, particle.size);
+          }
+
+          // Draw ripples
+          noFill();
+          for (let ripple of this.ripples) {
+            stroke(255, 255, 255, ripple.opacity);
+            strokeWeight(2);
+            ellipse(ripple.x, ripple.y, ripple.radius * 2);
+          }
+
+          // Draw zone boundary
+          super.display();
+        }
+
+        handleClick(x, y) {
+          // Create ripples on click
+          this.addRipple(x, y);
+        }
+
+        receiveObjects(fromDirection, objects) {
+          for (let obj of objects) {
+            if (obj.type === 'waterParticle') {
+              this.waterParticles.push({
+                x: obj.x,
+                y: obj.y,
+                size: obj.size,
+                speedX: obj.speedX,
+                speedY: obj.speedY,
+                opacity: obj.opacity,
+              });
+            }
+          }
+        }
+      }
+
+      // Riley's Zone (2,0) - Urban
+      class RileyZone extends Zone {
+        constructor(row, col, x, y) {
+          super(row, col, x, y);
+          this.buildings = [];
+          this.cars = [];
+          this.backgroundColor = [169, 169, 169]; // Medium gray
+
+          // Add some initial buildings
+          for (let i = 0; i < 3; i++) {
+            this.addBuilding(
+              random(ZONE_SIZE),
+              ZONE_SIZE,
+              random(20, 60),
+              random(40, 100)
+            );
+          }
+        }
+
+        addBuilding(x, y, width, height) {
+          let windowRows = Math.floor(height / 15);
+          let windowCols = Math.floor(width / 10);
+
+          let windows = [];
+          for (let r = 0; r < windowRows; r++) {
+            for (let c = 0; c < windowCols; c++) {
+              windows.push({
+                row: r,
+                col: c,
+                lit: random() < 0.3,
+              });
+            }
+          }
+
+          this.buildings.push({
+            x: x,
+            y: y,
+            width: width,
+            height: height,
+            color: [
+              random(50, 150),
+              random(50, 150),
+              random(50, 150),
+            ],
+            windows: windows,
+          });
+        }
+
+        addCar(x, y, direction) {
+          this.cars.push({
+            x: x,
+            y: y,
+            width: random(15, 25),
+            height: random(8, 12),
+            color: [
+              random(100, 255),
+              random(100, 255),
+              random(100, 255),
+            ],
+            speed: random(1, 3) * direction,
+            direction: direction,
+          });
+        }
+
+        update() {
+          // Clear previous objects to share
+          this.clearObjectsToShare();
+
+          // Update cars
+          for (let i = this.cars.length - 1; i >= 0; i--) {
+            let car = this.cars[i];
+            car.x += car.speed;
+
+            // Check if car leaves zone
+            if (car.x > ZONE_SIZE && car.direction > 0) {
+              this.objectsToShare.right.push({
+                type: 'car',
+                x: car.x - ZONE_SIZE,
+                y: car.y,
+                width: car.width,
+                height: car.height,
+                color: car.color,
+                speed: car.speed,
+                direction: car.direction,
+              });
+              this.cars.splice(i, 1);
+            } else if (car.x + car.width < 0 && car.direction < 0) {
+              this.objectsToShare.left.push({
+                type: 'car',
+                x: ZONE_SIZE + car.x,
+                y: car.y,
+                width: car.width,
+                height: car.height,
+                color: car.color,
+                speed: car.speed,
+                direction: car.direction,
+              });
+              this.cars.splice(i, 1);
+            }
+          }
+
+          // Occasionally create new cars
+          if (random() < 0.02 && this.cars.length < 4) {
+            let y = ZONE_SIZE - 30 - random(0, 30);
+            let direction = random() < 0.5 ? 1 : -1;
+            let x = direction > 0 ? -30 : ZONE_SIZE + 30;
+            this.addCar(x, y, direction);
+          }
+
+          // Occasionally toggle window lights
+          if (frameCount % 30 === 0) {
+            for (let building of this.buildings) {
+              for (let window of building.windows) {
+                if (random() < 0.05) {
+                  window.lit = !window.lit;
+                }
+              }
+            }
+          }
+        }
+
+        display() {
+          // Draw background - sky gradient
+          background(this.backgroundColor);
+
+          // Draw road
+          fill(50);
+          rect(0, ZONE_SIZE - 50, ZONE_SIZE, 50);
+
+          // Road lines
+          stroke(255, 255, 0);
+          strokeWeight(2);
+          for (let x = 0; x < ZONE_SIZE; x += 30) {
+            line(x, ZONE_SIZE - 25, x + 15, ZONE_SIZE - 25);
+          }
+
+          // Draw buildings
+          for (let building of this.buildings) {
+            push();
+            translate(building.x, building.y);
+
+            // Building structure
+            noStroke();
+            fill(building.color);
+            rect(
+              0,
+              -building.height,
+              building.width,
+              building.height
+            );
+
+            // Windows
+            for (let window of building.windows) {
+              let wx = window.col * 10 + 2;
+              let wy = -building.height + window.row * 15 + 2;
+
+              if (window.lit) {
+                fill(255, 255, 200);
+              } else {
+                fill(50, 50, 70);
+              }
+
+              rect(wx, wy, 6, 10);
+            }
+
+            pop();
+          }
+
+          // Draw cars
+          for (let car of this.cars) {
+            push();
+            translate(car.x, car.y);
+
+            // Car body
+            fill(car.color);
+            noStroke();
+            rect(0, 0, car.width, car.height);
+
+            // Windows
+            fill(200, 200, 255);
+            rect(
+              car.width * 0.2,
+              -car.height * 0.5,
+              car.width * 0.3,
+              car.height * 0.5
+            );
+
+            // Wheels
+            fill(30);
+            ellipse(car.width * 0.25, car.height, car.height * 0.4);
+            ellipse(car.width * 0.75, car.height, car.height * 0.4);
+
+            pop();
+          }
+
+          // Draw zone boundary
+          super.display();
+        }
+
+        handleClick(x, y) {
+          // Add building on click
+          if (y < ZONE_SIZE - 50) {
+            // Only add buildings above the road
+            this.addBuilding(
+              x - 25,
+              ZONE_SIZE,
+              random(30, 70),
+              random(50, 150)
+            );
+          }
+        }
+
+        receiveObjects(fromDirection, objects) {
+          for (let obj of objects) {
+            if (obj.type === 'car') {
+              this.cars.push({
+                x: obj.x,
+                y: obj.y,
+                width: obj.width,
+                height: obj.height,
+                color: obj.color,
+                speed: obj.speed,
+                direction: obj.direction,
+              });
+            }
+          }
+        }
+      }
+
+      // Jamie's Zone (2,1) - Beach
+      class JamieZone extends Zone {
+        constructor(row, col, x, y) {
+          super(row, col, x, y);
+          this.sandcastles = [];
+          this.waves = [];
+          this.backgroundColor = [238, 214, 175]; // Sand color
+
+          // Create initial waves
+          for (let i = 0; i < 5; i++) {
+            this.addWave((i * ZONE_SIZE) / 5);
+          }
+        }
+
+        addSandcastle(x, y) {
+          this.sandcastles.push({
+            x: x,
+            y: y,
+            width: random(20, 40),
+            height: random(30, 50),
+            towers: Math.floor(random(1, 4)),
+            color: [220, 192, 150],
+          });
+        }
+
+        addWave(x) {
+          this.waves.push({
+            x: x,
+            y: 50,
+            width: random(80, 120),
+            height: random(10, 20),
+            speed: random(0.5, 1.5),
+            offset: random(TWO_PI),
+          });
+        }
+
+        update() {
+          // Clear previous objects to share
+          this.clearObjectsToShare();
+
+          // Update waves
+          for (let i = this.waves.length - 1; i >= 0; i--) {
+            let wave = this.waves[i];
+            wave.x -= wave.speed;
+
+            // Loop waves back to right side
+            if (wave.x + wave.width < 0) {
+              wave.x = ZONE_SIZE;
+            }
+
+            // Check for wave collision with sandcastles
+            for (let j = this.sandcastles.length - 1; j >= 0; j--) {
+              let castle = this.sandcastles[j];
+              if (
+                abs(wave.x - castle.x) < castle.width / 2 &&
+                wave.y > castle.y - castle.height
+              ) {
+                // Wave erodes sandcastle
+                castle.height = max(0, castle.height - 0.2);
+
+                if (castle.height <= 5) {
+                  this.sandcastles.splice(j, 1);
+                }
+              }
+            }
+
+            // Share water particles with neighbors
+            if (random() < 0.01) {
+              if (wave.x < ZONE_SIZE / 4) {
+                this.objectsToShare.left.push({
+                  type: 'waterParticle',
+                  x: ZONE_SIZE + wave.x,
+                  y: wave.y + random(-10, 10),
+                  size: random(2, 6),
+                  speedX: random(-0.5, -1.5),
+                  speedY: random(-0.1, 0.1),
+                  opacity: random(100, 200),
+                });
+              }
+            }
+          }
+        }
+
+        display() {
+          // Draw background (sand)
+          background(this.backgroundColor);
+
+          // Draw water at top
+          fill(65, 105, 225, 200);
+          noStroke();
+          rect(0, 0, ZONE_SIZE, 100);
+
+          // Draw waves
+          fill(255, 255, 255, 180);
+          noStroke();
+          for (let wave of this.waves) {
+            beginShape();
+            for (let x = 0; x < wave.width; x++) {
+              let wx = wave.x + x;
+              let wy =
+                wave.y +
+                (sin(x * 0.1 + frameCount * 0.05 + wave.offset) *
+                  wave.height) /
+                  2;
+              vertex(wx, wy);
+            }
+            vertex(wave.x + wave.width, 100);
+            vertex(wave.x, 100);
+            endShape(CLOSE);
+          }
+
+          // Draw sandcastles
+          for (let castle of this.sandcastles) {
+            push();
+            translate(castle.x, castle.y);
+
+            // Main mound
+            fill(castle.color);
+            noStroke();
+            ellipse(0, 0, castle.width, castle.height);
+
+            // Towers
+            for (let t = 0; t < castle.towers; t++) {
+              let tx = map(
+                t,
+                0,
+                castle.towers - 1,
+                -castle.width / 3,
+                castle.width / 3
+              );
+              let th = castle.height * 0.6;
+              let tw = castle.width * 0.2;
+
+              rect(tx - tw / 2, -th, tw, th);
+
+              // Tower top
+              triangle(
+                tx - tw / 2,
+                -th,
+                tx + tw / 2,
+                -th,
+                tx,
+                -th - tw / 2
+              );
+            }
+
+            pop();
+          }
+
+          // Draw zone boundary
+          super.display();
+        }
+
+        handleClick(x, y) {
+          // Build sandcastle on click
+          if (y > 100) {
+            // Only on the sand, not in the water
+            this.addSandcastle(x, y);
+          }
+        }
+
+        receiveObjects(fromDirection, objects) {
+          for (let obj of objects) {
+            if (obj.type === 'waterParticle') {
+              // Convert incoming water particles to waves if from top
+              if (fromDirection === 'top') {
+                this.addWave(obj.x);
+              }
+            }
+          }
+        }
+      }
+
+      // Quinn's Zone (2,2) - Coral reef
+      class QuinnZone extends Zone {
+        constructor(row, col, x, y) {
+          super(row, col, x, y);
+          this.corals = [];
+          this.fish = [];
+          this.bubbles = [];
+          this.backgroundColor = [0, 105, 148]; // Deep blue
+
+          // Create initial corals
+          for (let i = 0; i < 8; i++) {
+            this.addCoral(
+              random(ZONE_SIZE),
+              random(ZONE_SIZE * 0.5, ZONE_SIZE)
+            );
+          }
+
+          // Create initial fish
+          for (let i = 0; i < 5; i++) {
+            this.addFish(random(ZONE_SIZE), random(ZONE_SIZE));
+          }
+        }
+
+        addCoral(x, y) {
+          this.corals.push({
+            x: x,
+            y: y,
+            size: random(20, 50),
+            branches: Math.floor(random(3, 8)),
+            color: [
+              random(200, 255),
+              random(50, 150),
+              random(150, 255),
+            ],
+          });
+        }
+
+        addFish(x, y) {
+          this.fish.push({
+            x: x,
+            y: y,
+            size: random(10, 20),
+            color: [
+              random(150, 255),
+              random(100, 255),
+              random(0, 200),
+            ],
+            speed: random(0.5, 2),
+            direction: random() < 0.5 ? -1 : 1,
+            tailPhase: random(TWO_PI),
+            targetX: random(ZONE_SIZE),
+            targetY: random(ZONE_SIZE),
+          });
+        }
+
+        addBubble(x, y) {
+          this.bubbles.push({
+            x: x,
+            y: y,
+            size: random(2, 8),
+            speed: random(0.5, 2),
+            wobble: random(1, 3),
+          });
+        }
+
+        update() {
+          // Clear previous objects to share
+          this.clearObjectsToShare();
+
+          // Update fish
+          for (let i = this.fish.length - 1; i >= 0; i--) {
+            let fish = this.fish[i];
+
+            // Update tail animation
+            fish.tailPhase += 0.2;
+
+            // Movement toward target
+            let dx = fish.targetX - fish.x;
+            let dy = fish.targetY - fish.y;
+            let dist = sqrt(dx * dx + dy * dy);
+
+            if (dist < 5) {
+              // Set new target
+              fish.targetX = random(ZONE_SIZE);
+              fish.targetY = random(ZONE_SIZE);
+
+              // Set direction based on target
+              fish.direction = fish.targetX > fish.x ? 1 : -1;
+            } else {
+              // Move toward target
+              fish.x += dx * 0.02;
+              fish.y += dy * 0.02;
+            }
+
+            // Occasionally create bubbles
+            if (random() < 0.02) {
+              this.addBubble(fish.x, fish.y);
+            }
+
+            // Check if fish leaves zone
+            if (fish.x < 0) {
+              this.objectsToShare.left.push({
+                type: 'fish',
+                x: ZONE_SIZE + fish.x,
+                y: fish.y,
+                size: fish.size,
+                color: fish.color,
+                speed: fish.speed,
+                direction: fish.direction,
+              });
+              this.fish.splice(i, 1);
+            } else if (fish.x > ZONE_SIZE) {
+              this.objectsToShare.right.push({
+                type: 'fish',
+                x: fish.x - ZONE_SIZE,
+                y: fish.y,
+                size: fish.size,
+                color: fish.color,
+                speed: fish.speed,
+                direction: fish.direction,
+              });
+              this.fish.splice(i, 1);
+            } else if (fish.y < 0) {
+              this.objectsToShare.top.push({
+                type: 'fish',
+                x: fish.x,
+                y: ZONE_SIZE + fish.y,
+                size: fish.size,
+                color: fish.color,
+                speed: fish.speed,
+                direction: fish.direction,
+              });
+              this.fish.splice(i, 1);
+            }
+          }
+
+          // Update bubbles
+          for (let i = this.bubbles.length - 1; i >= 0; i--) {
+            let bubble = this.bubbles[i];
+            bubble.y -= bubble.speed;
+            bubble.x +=
+              sin(frameCount * 0.1 + i) * bubble.wobble * 0.1;
+
+            // Remove bubbles that reach the top
+            if (bubble.y + bubble.size < 0) {
+              this.bubbles.splice(i, 1);
+            }
+
+            // Share bubbles with zone above
+            if (bubble.y < 0 && bubble.y + bubble.size > 0) {
+              this.objectsToShare.top.push({
+                type: 'bubble',
+                x: bubble.x,
+                y: ZONE_SIZE + bubble.y,
+                size: bubble.size,
+                speed: bubble.speed,
+                wobble: bubble.wobble,
+              });
+              this.bubbles.splice(i, 1);
+            }
+          }
+
+          // Occasionally add new fish
+          if (random() < 0.01 && this.fish.length < 8) {
+            this.addFish(random(ZONE_SIZE), random(ZONE_SIZE));
+          }
+        }
+
+        display() {
+          // Draw background (water)
+          background(this.backgroundColor);
+
+          // Draw sandy bottom
+          fill(238, 214, 175);
+          noStroke();
+          rect(0, ZONE_SIZE - 30, ZONE_SIZE, 30);
+
+          // Draw corals
+          for (let coral of this.corals) {
+            push();
+            translate(coral.x, coral.y);
+
+            // Draw coral branches
+            fill(coral.color);
+            noStroke();
+
+            for (let b = 0; b < coral.branches; b++) {
+              let angle = map(b, 0, coral.branches, 0, PI);
+              let length = coral.size * random(0.5, 1);
+
+              push();
+              rotate(angle);
+              beginShape();
+              vertex(0, 0);
+              vertex(-coral.size / 5, -length / 3);
+              vertex(0, -length);
+              vertex(coral.size / 5, -length / 3);
+              endShape(CLOSE);
+              pop();
+            }
+
+            pop();
+          }
+
+          // Draw fish
+          for (let fish of this.fish) {
+            push();
+            translate(fish.x, fish.y);
+            scale(fish.direction, 1); // Flip based on direction
+
+            // Fish body
+            fill(fish.color);
+            noStroke();
+            ellipse(0, 0, fish.size * 1.5, fish.size);
+
+            // Tail
+            let tailX = -fish.size * 0.7;
+            let tailWidth = fish.size * 0.8;
+            let tailY = sin(fish.tailPhase) * fish.size * 0.3;
+
+            triangle(
+              tailX,
+              0,
+              tailX - tailWidth,
+              tailY,
+              tailX - tailWidth,
+              -tailY
+            );
+
+            // Eye
+            fill(255);
+            ellipse(
+              fish.size * 0.4,
+              -fish.size * 0.2,
+              fish.size * 0.3
+            );
+            fill(0);
+            ellipse(
+              fish.size * 0.5,
+              -fish.size * 0.2,
+              fish.size * 0.1
+            );
+
+            pop();
+          }
+
+          // Draw bubbles
+          fill(255, 255, 255, 150);
+          noStroke();
+          for (let bubble of this.bubbles) {
+            ellipse(bubble.x, bubble.y, bubble.size);
+            // Highlight
+            fill(255, 255, 255, 80);
+            ellipse(
+              bubble.x - bubble.size / 4,
+              bubble.y - bubble.size / 4,
+              bubble.size / 3
+            );
+            fill(255, 255, 255, 150);
+          }
+
+          // Draw zone boundary
+          super.display();
+        }
+
+        handleClick(x, y) {
+          // Add coral on click
+          if (y > ZONE_SIZE - 100) {
+            this.addCoral(x, y);
+          } else {
+            // Add fish elsewhere
+            this.addFish(x, y);
+          }
+        }
+
+        handleMouseMove(x, y) {
+          // Direct fish toward mouse
+          for (let fish of this.fish) {
+            // Only sometimes change direction to avoid chaos
+            if (random() < 0.05) {
+              fish.targetX = x + random(-50, 50);
+              fish.targetY = y + random(-50, 50);
+              fish.direction = fish.targetX > fish.x ? 1 : -1;
+            }
+          }
+        }
+
+        receiveObjects(fromDirection, objects) {
+          for (let obj of objects) {
+            if (obj.type === 'fish') {
+              this.fish.push({
+                x: obj.x,
+                y: obj.y,
+                size: obj.size,
+                color: obj.color,
+                speed: obj.speed,
+                direction: obj.direction,
+                tailPhase: random(TWO_PI),
+                targetX: random(ZONE_SIZE),
+                targetY: random(ZONE_SIZE),
+              });
+            } else if (obj.type === 'bubble') {
+              this.bubbles.push({
+                x: obj.x,
+                y: obj.y,
+                size: obj.size,
+                speed: obj.speed,
+                wobble: obj.wobble,
+              });
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
