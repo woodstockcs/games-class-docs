@@ -1,7 +1,7 @@
 ---
 title: 1.1 Mouse Variables
 nav_order: 110
-parent: Avatar
+parent: Character
 layout: default
 ---
 
