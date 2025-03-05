@@ -1,6 +1,11 @@
-# Avatar
+---
+title: Character
+nav_order: 4
+has_children: true
+layout: default
+---
 
-make frames for a gif of a npc for a game.
+make an npc for a game.
 
 npc needs:
 - feeling to evoke
