@@ -1,4 +1,4 @@
-# Unit 1: Non-Player Characters
+# Avatar
 
 make frames for a gif of a npc for a game.
 
