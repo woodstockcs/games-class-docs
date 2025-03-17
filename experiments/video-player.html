@@ -141,18 +141,34 @@
       }
 
       .status-message {
+        display: none; /* Hide the green box */
+      }
+
+      .pause-instruction {
         padding: 10px;
-        background-color: #2ecc71;
+        background-color: #f39c12;
         color: white;
         border-radius: 4px;
         margin-top: 15px;
         display: none;
         text-align: center;
+        position: relative;
+      }
+
+      .pause-instruction button {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
       }
     </style>
   </head>
   <body>
-    <h1>P5.js: Understanding Variables and Program Flow</h1>
+    <h1>Bouncing Ball</h1>
 
     <div class="container">
       <div class="video-container">
@@ -165,6 +181,10 @@
         </div>
         <div id="statusMessage" class="status-message">
           Video paused at end of section
+        </div>
+        <div id="pauseInstruction" class="pause-instruction">
+          <!-- Pause instruction will be populated here by JavaScript -->
+          <button onclick="dismissPauseInstruction()">✖</button>
         </div>
       </div>
 
@@ -182,138 +202,270 @@
 
       // Video data from JSON
       const videoData = {
-        videoTitle: 'P5.js: Understanding Variables and Program Flow',
+        videoTitle: 'Bouncing Ball',
         sections: [
           {
             id: 1,
-            title: 'Introduction',
-            description: 'Welcome and context about the video',
-            classification: 'non-content',
+            title: 'Introduction to the Problem',
+            description:
+              'Looking at the issue of a circle moving off screen',
+            classification: 'core content',
             startTime: '00:00',
-            endTime: '00:36',
-            durationSeconds: 36,
+            endTime: '00:18',
+            durationSeconds: 18,
+            pauseInstruction:
+              'Look at the initial code example with `x = 0` and `x += 3`. Try creating this simple animation yourself to see the circle move off screen.',
           },
           {
             id: 2,
-            title: 'Program Flow in p5.js',
-            description: 'Explaining setup and draw functions',
+            title: 'Conditional Statements Format',
+            description: 'Explaining the syntax of if statements',
             classification: 'core content',
-            startTime: '00:36',
-            endTime: '01:22',
-            durationSeconds: 46,
+            startTime: '00:18',
+            endTime: '00:49',
+            durationSeconds: 31,
+            pauseInstruction:
+              'Write down the syntax for an if statement: `if (condition) { code to execute }`',
           },
           {
             id: 3,
-            title: 'Draw Loop Explanation',
-            description: 'How draw function loops forever',
+            title: 'Identifying the Boundary Condition',
+            description:
+              'Determining when the circle should turn around',
             classification: 'core content',
-            startTime: '01:22',
-            endTime: '02:22',
-            durationSeconds: 60,
+            startTime: '00:49',
+            endTime: '01:26',
+            durationSeconds: 37,
+            pauseInstruction:
+              'Think about what condition we need to check to know when the ball has reached the edge of the canvas.',
           },
           {
             id: 4,
-            title: 'Simplifying the Example',
-            description: 'Creating a minimal circle example',
-            classification: 'important context',
-            startTime: '02:22',
-            endTime: '03:16',
-            durationSeconds: 54,
+            title: 'Creating the Edge Detection',
+            description:
+              'Writing the if statement to detect canvas edge',
+            classification: 'core content',
+            startTime: '01:26',
+            endTime: '02:44',
+            durationSeconds: 78,
+            pauseInstruction:
+              "Add the if statement `if (x > width)` to your code, but don't add any code inside it yet.",
           },
           {
             id: 5,
-            title: 'Introduction to Variables',
-            description: 'Need for things that change in programs',
-            classification: 'core content',
-            startTime: '03:16',
-            endTime: '03:57',
-            durationSeconds: 41,
+            title: 'Testing the Condition',
+            description: 'Adding println to verify condition works',
+            classification: 'important context',
+            startTime: '02:44',
+            endTime: '03:33',
+            durationSeconds: 49,
+            pauseInstruction:
+              'Add `println("off the screen")` inside your if statement to test if it triggers correctly.',
           },
           {
             id: 6,
-            title: 'What is a Variable',
-            description:
-              'Explaining named entities that store values',
+            title: 'First Attempt at Direction Change',
+            description: 'Trying to make the ball reverse direction',
             classification: 'core content',
-            startTime: '03:57',
-            endTime: '04:47',
-            durationSeconds: 50,
+            startTime: '03:33',
+            endTime: '04:14',
+            durationSeconds: 41,
+            pauseInstruction:
+              'Try adding `x = x - 3` inside your if statement and predict what will happen.',
           },
           {
             id: 7,
-            title: 'Using mouseX and mouseY',
+            title: 'Why Simple Reversal Fails',
             description:
-              'Demonstrating built-in mouse position variables',
+              'Explaining the problem with direct reversal',
             classification: 'core content',
-            startTime: '04:47',
-            endTime: '05:26',
-            durationSeconds: 39,
+            startTime: '04:14',
+            endTime: '05:37',
+            durationSeconds: 83,
+            pauseInstruction:
+              'Create a new variable called `speed = 3` at the top of your sketch, then replace `x += 3` with `x += speed`.',
           },
           {
             id: 8,
-            title: 'Simple Painting Program',
-            description: 'Setting up a basic drawing application',
-            classification: 'important context',
-            startTime: '05:26',
-            endTime: '06:04',
+            title: 'Using a Variable to Change Direction',
+            description:
+              'Implementing a speed variable for directional control',
+            classification: 'core content',
+            startTime: '05:37',
+            endTime: '06:15',
             durationSeconds: 38,
+            pauseInstruction:
+              'Inside your if statement, change `speed = -3` instead of changing x directly, then run your code to see the ball bounce.',
           },
           {
             id: 9,
-            title: 'Moving Background to Setup',
-            description: 'Experiment with background placement',
-            classification: 'core content',
-            startTime: '06:04',
-            endTime: '06:34',
-            durationSeconds: 30,
+            title: 'Full Bouncing Motion',
+            description: 'Extending the code for complete bouncing',
+            classification: 'important context',
+            startTime: '06:15',
+            endTime: '06:33',
+            durationSeconds: 18,
+            pauseInstruction:
+              'Try adding another if statement to handle the left edge (`if (x < 0)`) and make the ball bounce back and forth continuously.',
           },
           {
             id: 10,
-            title: 'Explaining the Trail Effect',
-            description: 'Why circles persist when background moved',
-            classification: 'core content',
-            startTime: '06:34',
-            endTime: '07:30',
-            durationSeconds: 56,
+            title: 'Next Steps with Conditionals',
+            description:
+              'Preview of else/else if and logical operators',
+            classification: 'optional extra',
+            startTime: '06:33',
+            endTime: '07:11',
+            durationSeconds: 38,
+            pauseInstruction:
+              'Consider how you might use `else` or `else if` statements in your bouncing ball code for additional features.',
           },
           {
             id: 11,
-            title: 'Introduction to Events',
-            description: 'Setup and draw as event functions',
-            classification: 'core content',
-            startTime: '07:30',
-            endTime: '08:09',
-            durationSeconds: 39,
-          },
-          {
-            id: 12,
-            title: 'Using mousePressed',
-            description: 'Creating a mouse click event handler',
-            classification: 'core content',
-            startTime: '08:09',
-            endTime: '09:06',
-            durationSeconds: 57,
-          },
-          {
-            id: 13,
-            title: 'Explaining Render Order',
-            description: 'Why background at end hides shapes',
-            classification: 'optional extra',
-            startTime: '09:06',
-            endTime: '10:10',
-            durationSeconds: 64,
-          },
-          {
-            id: 14,
             title: 'Conclusion',
-            description: 'Final thoughts and next steps',
+            description: 'Final thoughts and next video preview',
             classification: 'non-content',
-            startTime: '10:10',
-            endTime: '10:34',
-            durationSeconds: 24,
+            startTime: '07:11',
+            endTime: '07:34',
+            durationSeconds: 23,
+            pauseInstruction:
+              'Think about what other conditions you might want to check in a bouncing ball program (like top/bottom edges or changing color/size).',
           },
         ],
       };
+      //   const videoData = {
+      //     videoTitle: 'P5.js: Understanding Variables and Program Flow',
+      //     sections: [
+      //       {
+      //         id: 1,
+      //         title: 'Introduction',
+      //         description: 'Welcome and context about the video',
+      //         classification: 'non-content',
+      //         startTime: '00:00',
+      //         endTime: '00:36',
+      //         durationSeconds: 36,
+      //       },
+      //       {
+      //         id: 2,
+      //         title: 'Program Flow in p5.js',
+      //         description: 'Explaining setup and draw functions',
+      //         classification: 'core content',
+      //         startTime: '00:36',
+      //         endTime: '01:22',
+      //         durationSeconds: 46,
+      //       },
+      //       {
+      //         id: 3,
+      //         title: 'Draw Loop Explanation',
+      //         description: 'How draw function loops forever',
+      //         classification: 'core content',
+      //         startTime: '01:22',
+      //         endTime: '02:22',
+      //         durationSeconds: 60,
+      //       },
+      //       {
+      //         id: 4,
+      //         title: 'Simplifying the Example',
+      //         description: 'Creating a minimal circle example',
+      //         classification: 'important context',
+      //         startTime: '02:22',
+      //         endTime: '03:16',
+      //         durationSeconds: 54,
+      //       },
+      //       {
+      //         id: 5,
+      //         title: 'Introduction to Variables',
+      //         description: 'Need for things that change in programs',
+      //         classification: 'core content',
+      //         startTime: '03:16',
+      //         endTime: '03:57',
+      //         durationSeconds: 41,
+      //       },
+      //       {
+      //         id: 6,
+      //         title: 'What is a Variable',
+      //         description:
+      //           'Explaining named entities that store values',
+      //         classification: 'core content',
+      //         startTime: '03:57',
+      //         endTime: '04:47',
+      //         durationSeconds: 50,
+      //       },
+      //       {
+      //         id: 7,
+      //         title: 'Using mouseX and mouseY',
+      //         description:
+      //           'Demonstrating built-in mouse position variables',
+      //         classification: 'core content',
+      //         startTime: '04:47',
+      //         endTime: '05:26',
+      //         durationSeconds: 39,
+      //       },
+      //       {
+      //         id: 8,
+      //         title: 'Simple Painting Program',
+      //         description: 'Setting up a basic drawing application',
+      //         classification: 'important context',
+      //         startTime: '05:26',
+      //         endTime: '06:04',
+      //         durationSeconds: 38,
+      //       },
+      //       {
+      //         id: 9,
+      //         title: 'Moving Background to Setup',
+      //         description: 'Experiment with background placement',
+      //         classification: 'core content',
+      //         startTime: '06:04',
+      //         endTime: '06:34',
+      //         durationSeconds: 30,
+      //       },
+      //       {
+      //         id: 10,
+      //         title: 'Explaining the Trail Effect',
+      //         description: 'Why circles persist when background moved',
+      //         classification: 'core content',
+      //         startTime: '06:34',
+      //         endTime: '07:30',
+      //         durationSeconds: 56,
+      //       },
+      //       {
+      //         id: 11,
+      //         title: 'Introduction to Events',
+      //         description: 'Setup and draw as event functions',
+      //         classification: 'core content',
+      //         startTime: '07:30',
+      //         endTime: '08:09',
+      //         durationSeconds: 39,
+      //       },
+      //       {
+      //         id: 12,
+      //         title: 'Using mousePressed',
+      //         description: 'Creating a mouse click event handler',
+      //         classification: 'core content',
+      //         startTime: '08:09',
+      //         endTime: '09:06',
+      //         durationSeconds: 57,
+      //       },
+      //       {
+      //         id: 13,
+      //         title: 'Explaining Render Order',
+      //         description: 'Why background at end hides shapes',
+      //         classification: 'optional extra',
+      //         startTime: '09:06',
+      //         endTime: '10:10',
+      //         durationSeconds: 64,
+      //       },
+      //       {
+      //         id: 14,
+      //         title: 'Conclusion',
+      //         description: 'Final thoughts and next steps',
+      //         classification: 'non-content',
+      //         startTime: '10:10',
+      //         endTime: '10:34',
+      //         durationSeconds: 24,
+      //       },
+      //     ],
+      //   };
 
       // Global variables
       let player;
@@ -321,7 +473,8 @@
       let currentSectionIndex = 0;
       let timeUpdateInterval;
       let pausePoints = [];
-      let ytVideoId = '7A5tKW9HGoM'; // P5.js: Understanding Variables and Program Flow
+      let ytVideoId = 'LO3Awjn_gyU'; //'7A5tKW9HGoM'; // P5.js: Understanding Variables and Program Flow
+      let lastPausePoint = -1; // Track the most recent pause point
 
       // Initialize YouTube player when API is ready
       function onYouTubeIframeAPIReady() {
@@ -331,7 +484,7 @@
           videoId: ytVideoId,
           playerVars: {
             playsinline: 1,
-            controls: 0,
+            controls: 1,
             rel: 0,
             modestbranding: 1,
           },
@@ -455,22 +608,32 @@
         // Check if we've reached a pause point
         const currentTime = player.getCurrentTime();
         for (let i = 0; i < pausePoints.length; i++) {
+          // Skip the check for the most recent pause point
+          if (i === lastPausePoint) continue;
+
           // Check if we're within half a second of a pause point and the video is playing
           if (
             Math.abs(currentTime - pausePoints[i]) < 0.5 &&
-            player.getPlayerState() === YT.PlayerState.PLAYING
+            player.getPlayerState() === YT.PlayerState.PLAYING &&
+            currentTime > pausePoints[i] - 2 // Ensure it's not at the start of the section
           ) {
             player.pauseVideo();
             currentSectionIndex = i;
             highlightCurrentSection();
 
-            // Show status message
-            const statusMessage =
-              document.getElementById('statusMessage');
-            statusMessage.textContent = `Paused at end of section: ${sections[i].title}`;
-            statusMessage.style.display = 'block';
+            // Show pause instruction
+            const pauseInstruction = document.getElementById(
+              'pauseInstruction'
+            );
+            pauseInstruction.textContent =
+              sections[i].pauseInstruction;
+            pauseInstruction.style.display = 'block';
 
-            break;
+            // Track the most recent pause point
+            lastPausePoint = i;
+
+            // Skip further checks to avoid re-pausing
+            return;
           }
         }
       }
@@ -545,7 +708,20 @@
         if (player.getPlayerState() === YT.PlayerState.PLAYING) {
           player.pauseVideo();
         } else {
-          player.playVideo();
+          // Skip pause point check for a short duration to avoid immediate re-pausing
+          setTimeout(() => {
+            player.playVideo();
+            // Reset the most recent pause point after a short delay to avoid re-pausing
+            setTimeout(() => {
+              lastPausePoint = -1;
+            }, 1000); // 1 second delay
+
+            // Hide pause instruction when resuming playback
+            const pauseInstruction = document.getElementById(
+              'pauseInstruction'
+            );
+            pauseInstruction.style.display = 'none';
+          }, 100);
         }
       }
 
@@ -560,8 +736,8 @@
         currentSectionIndex = index;
         highlightCurrentSection();
 
-        // Hide status message when navigating
-        document.getElementById('statusMessage').style.display =
+        // Hide pause instruction when navigating
+        document.getElementById('pauseInstruction').style.display =
           'none';
       }
 
@@ -577,6 +753,12 @@
         if (currentSectionIndex < sections.length - 1) {
           goToSection(currentSectionIndex + 1);
         }
+      }
+
+      // Dismiss the pause instruction
+      function dismissPauseInstruction() {
+        document.getElementById('pauseInstruction').style.display =
+          'none';
       }
 
       // Clean up on page unload
