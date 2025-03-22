@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>
+      P5.js: Understanding Variables and Program Flow - Interactive
+      Video
+    </title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>P5.js: Understanding Variables and Program Flow</h1>
+
+    <div class="container">
+      <div class="video-container">
+        <div id="player"></div>
+        <div class="controls">
+          <button id="playPauseBtn">Play</button>
+          <button id="prevSectionBtn">Previous Section</button>
+          <button id="nextSectionBtn">Next Section</button>
+          <div class="timestamp" id="currentTime">00:00 / 00:00</div>
+        </div>
+        <div class="additional-controls">
+          <select id="playbackSpeed" class="playback-speed">
+            <option value="0.5">0.5x</option>
+            <option value="0.75">0.75x</option>
+            <option value="1" selected>1x</option>
+            <option value="1.25">1.25x</option>
+            <option value="1.5">1.5x</option>
+            <option value="2">2x</option>
+          </select>
+          <button id="skipNonContentBtn">Skip Non-Content</button>
+          <button id="resetBtn" class="reset-button">
+            Reset Player
+          </button>
+        </div>
+        <div id="statusMessage" class="status-message">
+          Video paused at end of section
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quizContainer" class="quiz-container">
+          <div class="quiz-title">
+            Quick Check: <span id="quizSectionTitle"></span>
+          </div>
+          <div id="quizQuestion" class="quiz-question"></div>
+          <div class="quiz-options">
+            <button id="trueBtn">True</button>
+            <button id="falseBtn">False</button>
+          </div>
+          <div id="quizFeedback" class="quiz-feedback"></div>
+          <button id="continueBtn" style="display: none">
+            Continue
+          </button>
+        </div>
+      </div>
+
+      <div class="sections-container" id="sectionsList">
+        <!-- Sections will be populated here by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Load YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <!-- Load our data file -->
+    <script src="data.js"></script>
+
+    <!-- Load our main script -->
+    <script src="script.js"></script>
+  </body>
+</html>
