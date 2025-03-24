@@ -41,6 +41,7 @@ function onYouTubeIframeAPIReady() {
         controls: 0,
         rel: 0,
         modestbranding: 1,
+        iv_load_policy: 3,
       },
       events: {
         onReady: onPlayerReady,
