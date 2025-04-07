@@ -13,3 +13,5 @@ This is the course docs for Game Design.
 ---
 
 [THE FORM AT THE BOTTOM](https://docs.google.com/forms/d/e/1FAIpQLScHn0jnRI-LFoaxY4xIqheIUgCwvAxQUGn_B9VBkJcwVwywXA/viewform)
+
+[csp](https://docs.google.com/spreadsheets/d/1M1Bn04PItnsAfIWkYZRCXwHQWJ1DfDh9hfD0hMKc2Rc/edit?gid=0#gid=0)
